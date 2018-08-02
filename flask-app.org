@@ -1,6 +1,7 @@
-#+PROPERTY: header-args :session plasma :export both :tangle yes
+#+PROPERTY: header-args :session plasma :export both :tangle "./plasma-city/flask-app.py"
 
-* imports
+* Flask intro
+** imports
 #+BEGIN_SRC python
     from flask import Flask
     app = Flask(__name__)
@@ -8,7 +9,7 @@
 
 
 
-* route
+** route
 
 The route() function binds a function to an URL
 
@@ -19,7 +20,7 @@ The route() function binds a function to an URL
 #+END_SRC
 
 
-* rules variables
+** rules variables
 
 You can add variable sections to a URL by marking sections with <variable_name>. Your function then receives the
 <variable_name> as a keyword argument.
@@ -46,7 +47,7 @@ def show_subpath(subpath):
 
 
 
-* URL building
+** URL building
 
 #+BEGIN_SRC python
 
@@ -69,7 +70,7 @@ def show_subpath(subpath):
 #+END_SRC
 
 
-* rendering templates
+** rendering templates
 
 #+BEGIN_SRC python
 
@@ -83,7 +84,7 @@ def hello(name=None):
 #+END_SRC
 
 
-* htmlfontify emacs function
+** htmlfontify emacs function
 
 #+BEGIN_SRC python
 

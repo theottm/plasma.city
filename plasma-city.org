@@ -1,4 +1,5 @@
 #+PROPERTY: header-args :session plasma :export both :tangle yes
+#+COLUMNS: %25ITEM %header-args
 
 * Intro
 
@@ -97,11 +98,162 @@ We need to populate the server with local data.
 
 *** Server
 
+**** Flask Application
+:PROPERTIES:
+:HEADER-ARGS: :session flask-app :export both :tangle plasma-city/flask-app.py
+:END:
+
 When we run the app, we would like to be able to access it with a browser. Let's make our server alive and talking.
 
-This is handled in our little [[file:~/code/web/plasma-city/flask_test/hello-ob.org][flask intro]], which follows the flask quickstart page.
+This is this can be considered as an introduction to flask. It follows the flask quickstart page.
 
-To understand how this link is managed in our final file tangling (when all the file is exported as a whole programm ready to run) please sea [[*Follow links][Org Tangle Appendice]].
+To understand how this link is managed in our final file tangling (when all the file is exported as a whole programm ready to run) please sea [[*Follow links][Org Tangle Appendice]]. You can refer to the appendice each time there is a special meta-programming code doing things you don't understand.
+
+An easy way to go back and forth is to use the command C-u C-SPC to come back to the place you where before visiting the link or doing a isearch or chatever other command you used to make you jump to another position. This is a very handy tool for quick navigation. You can now jump headlessly around, you have a way to come back !
+
+***** imports
+#+BEGIN_SRC python
+    from flask import Flask
+    app = Flask(__name__)
+#+END_SRC
+
+
+***** route
+
+The route() function binds a function to an URL
+
+#+BEGIN_SRC python
+    @app.route('/')
+    def index():
+        return 'Index Page'
+#+END_SRC
+
+***** rules variables
+
+You can add variable sections to a URL by marking sections with <variable_name>. Your function then receives the
+<variable_name> as a keyword argument.
+
+Optionally, you can use a converter to specify the type of the argument like
+<converter:variable_name>
+
+#+BEGIN_SRC python
+@app.route('/user/<username>')
+def show_user_profile(username):
+    # show the user profile for that user
+    return 'User %s' % username
+
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return 'Post %d' % post_id
+
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    # show the subpath after /path/
+    return 'Subpath %s' % subpath
+#+END_SRC
+
+
+***** URL building
+
+#+BEGIN_SRC python
+
+    from flask import url_for
+
+    @app.route('/login')
+    def login():
+        return 'login'
+
+    @app.route('/usr/<username>')
+    def profile(username):
+        return '{}\'s profile'.format(username)
+
+    with app.test_request_context():
+        print(url_for('index'))
+        print(url_for('login'))
+        print(url_for('login', next='/'))
+        print(url_for('profile', username='John Doe'))
+
+#+END_SRC
+
+***** rendering templates
+
+#+BEGIN_SRC python
+
+from flask import render_template
+
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello.html', name=name)
+
+#+END_SRC
+
+***** htmlfontify emacs function
+
+#+BEGIN_SRC python
+
+    @app.route('/codex/')
+    def codex():
+        return render_template('codex.html')
+
+    @app.route('/hello-ob/')
+    def hello_ob():
+        return render_template('hello-ob.html')
+
+#+END_SRC
+**** Python package ?
+Create an __init__.py file to redirect to our app
+
+or keep a module and change the setup.py file.
+
+#+BEGIN_SRC python :tangle plasma-city/__init__.py
+
+pass
+
+#+END_SRC
+
+**** Deployment
+
+Now the server works localy, let's try to put it on my distant server. Let's take a look at what the flask doc says about it.
+
+http://flask.pocoo.org/docs/1.0/tutorial/install/
+
+***** Intallation
+#+BEGIN_SRC python :tangle setup.py
+
+from setuptools import find_packages, setup
+
+setup(
+    name='plasma-city',
+    version='1.0.0',
+    packages=find_packages(),
+    include_package_data=True,
+    zip_safe=False,
+    install_requires=[
+        'flask',
+    ],
+)
+
+#+END_SRC
+
+#+BEGIN_SRC include :tangle MANIFEST.in
+
+graft plasma-city/static
+graft plasma-city/templates
+global-exclude *.pyc
+
+#+END_SRC
+
+run pip install -e .
+
+***** Deploy
+
+get an ssh key / add key on the server
+
+copy wheel to the server
+
+run python setup.py bdist_wheel
 
 *** Data
 
@@ -113,7 +265,7 @@ We now have to learn about Flask's sidekick : jinja.
 
 **** jinja tutorial
 
-We want to make a
+We want to have
 
 *** Feed
 
@@ -129,3 +281,18 @@ We will need to be able to tangle the code in this org file to the expected file
 For this to work the way we want, we need to make sure that in the tangling process, each source code block is exported so that the outcome is a nice organised directory. This can be done by defining properties to source block header and defining rules that will tangle deferent properties differently.
 
 *** Follow links
+We did not wanted to separate the code in different files. But it could have been done so for convinience. But since the org file view is modulable, why would we need to ?
+
+There is such a possibility though, that the tangling process follows links and do some specific action on the encountered file. It can be very powerfull in other context.
+
+To figure this out, one should check John Kitchin's work on his blog and github page.
+
+*** Tangle according to the file system
+
+We want org to tangle the different code blocks in this file in specific locations in our project directory. This can be done by adding to the "header-args" property the value ":tangle "path/to/our/file/directory/file-name.file-extension" "
+
+Note that we need to specify an extension because we are not givin the value "yes" to :tangle, so the tangling process awaits from us that we specify path, file name and extension.
+*** Tangle all code blocks in a subtree to the same file
+In order to do this, we need to add a property to the headline whose children we want to have the same output file. To set a property C-c C-x p can help. Now we define a header-args property with value ":tangle path/to/our/file/file-name.filext"
+
+In order to make this work, we need to able properties inheritance and add the property header-args to the list of inheretable properties.

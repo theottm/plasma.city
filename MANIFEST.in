@@ -1,0 +1,3 @@
+graft plasma-city/static
+graft plasma-city/templates
+global-exclude *.pyc
