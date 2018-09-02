@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+	<!-- 2018-08-04 sam. 00:18 -->
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>&lrm;</title>
+	<meta name="generator" content="Org mode" />
+	<meta name="author" content="teddd" />
+	<style type="text/css">
+	  <!--/*--><![CDATA[/*><!--*/
+	  .title  { text-align: center;
+				margin-bottom: .2em; }
+	  .subtitle { text-align: center;
+				  font-size: medium;
+				  font-weight: bold;
+				  margin-top:0; }
+	  .todo   { font-family: monospace; color: red; }
+	  .done   { font-family: monospace; color: green; }
+	  .priority { font-family: monospace; color: orange; }
+	  .tag    { background-color: #eee; font-family: monospace;
+				padding: 2px; font-size: 80%; font-weight: normal; }
+	  .timestamp { color: #bebebe; }
+	  .timestamp-kwd { color: #5f9ea0; }
+	  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+	  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+	  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+	  .underline { text-decoration: underline; }
+	  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+	  p.verse { margin-left: 3%; }
+	  pre {
+		  border: 1px solid #ccc;
+		  box-shadow: 3px 3px 3px #eee;
+		  padding: 8pt;
+		  font-family: monospace;
+		  overflow: auto;
+		  margin: 1.2em;
+	  }
+	  pre.src {
+		  position: relative;
+		  overflow: visible;
+		  padding-top: 1.2em;
+	  }
+	  pre.src:before {
+		  display: none;
+		  position: absolute;
+		  background-color: white;
+		  top: -10px;
+		  right: 10px;
+		  padding: 3px;
+		  border: 1px solid black;
+	  }
+	  pre.src:hover:before { display: inline;}
+	  /* Languages per Org manual */
+	  pre.src-asymptote:before { content: 'Asymptote'; }
+	  pre.src-awk:before { content: 'Awk'; }
+	  pre.src-C:before { content: 'C'; }
+	  /* pre.src-C++ doesn't work in CSS */
+	  pre.src-clojure:before { content: 'Clojure'; }
+	  pre.src-css:before { content: 'CSS'; }
+	  pre.src-D:before { content: 'D'; }
+	  pre.src-ditaa:before { content: 'ditaa'; }
+	  pre.src-dot:before { content: 'Graphviz'; }
+	  pre.src-calc:before { content: 'Emacs Calc'; }
+	  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+	  pre.src-fortran:before { content: 'Fortran'; }
+	  pre.src-gnuplot:before { content: 'gnuplot'; }
+	  pre.src-haskell:before { content: 'Haskell'; }
+	  pre.src-hledger:before { content: 'hledger'; }
+	  pre.src-java:before { content: 'Java'; }
+	  pre.src-js:before { content: 'Javascript'; }
+	  pre.src-latex:before { content: 'LaTeX'; }
+	  pre.src-ledger:before { content: 'Ledger'; }
+	  pre.src-lisp:before { content: 'Lisp'; }
+	  pre.src-lilypond:before { content: 'Lilypond'; }
+	  pre.src-lua:before { content: 'Lua'; }
+	  pre.src-matlab:before { content: 'MATLAB'; }
+	  pre.src-mscgen:before { content: 'Mscgen'; }
+	  pre.src-ocaml:before { content: 'Objective Caml'; }
+	  pre.src-octave:before { content: 'Octave'; }
+	  pre.src-org:before { content: 'Org mode'; }
+	  pre.src-oz:before { content: 'OZ'; }
+	  pre.src-plantuml:before { content: 'Plantuml'; }
+	  pre.src-processing:before { content: 'Processing.js'; }
+	  pre.src-python:before { content: 'Python'; }
+	  pre.src-R:before { content: 'R'; }
+	  pre.src-ruby:before { content: 'Ruby'; }
+	  pre.src-sass:before { content: 'Sass'; }
+	  pre.src-scheme:before { content: 'Scheme'; }
+	  pre.src-screen:before { content: 'Gnu Screen'; }
+	  pre.src-sed:before { content: 'Sed'; }
+	  pre.src-sh:before { content: 'shell'; }
+	  pre.src-sql:before { content: 'SQL'; }
+	  pre.src-sqlite:before { content: 'SQLite'; }
+	  /* additional languages in org.el's org-babel-load-languages alist */
+	  pre.src-forth:before { content: 'Forth'; }
+	  pre.src-io:before { content: 'IO'; }
+	  pre.src-J:before { content: 'J'; }
+	  pre.src-makefile:before { content: 'Makefile'; }
+	  pre.src-maxima:before { content: 'Maxima'; }
+	  pre.src-perl:before { content: 'Perl'; }
+	  pre.src-picolisp:before { content: 'Pico Lisp'; }
+	  pre.src-scala:before { content: 'Scala'; }
+	  pre.src-shell:before { content: 'Shell Script'; }
+	  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+	  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+	  pre.src-cpp:before  { content: 'C++'; }
+	  pre.src-abc:before  { content: 'ABC'; }
+	  pre.src-coq:before  { content: 'Coq'; }
+	  pre.src-groovy:before  { content: 'Groovy'; }
+	  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+	  pre.src-bash:before  { content: 'bash'; }
+	  pre.src-csh:before  { content: 'csh'; }
+	  pre.src-ash:before  { content: 'ash'; }
+	  pre.src-dash:before  { content: 'dash'; }
+	  pre.src-ksh:before  { content: 'ksh'; }
+	  pre.src-mksh:before  { content: 'mksh'; }
+	  pre.src-posh:before  { content: 'posh'; }
+	  /* Additional Emacs modes also supported by the LaTeX listings package */
+	  pre.src-ada:before { content: 'Ada'; }
+	  pre.src-asm:before { content: 'Assembler'; }
+	  pre.src-caml:before { content: 'Caml'; }
+	  pre.src-delphi:before { content: 'Delphi'; }
+	  pre.src-html:before { content: 'HTML'; }
+	  pre.src-idl:before { content: 'IDL'; }
+	  pre.src-mercury:before { content: 'Mercury'; }
+	  pre.src-metapost:before { content: 'MetaPost'; }
+	  pre.src-modula-2:before { content: 'Modula-2'; }
+	  pre.src-pascal:before { content: 'Pascal'; }
+	  pre.src-ps:before { content: 'PostScript'; }
+	  pre.src-prolog:before { content: 'Prolog'; }
+	  pre.src-simula:before { content: 'Simula'; }
+	  pre.src-tcl:before { content: 'tcl'; }
+	  pre.src-tex:before { content: 'TeX'; }
+	  pre.src-plain-tex:before { content: 'Plain TeX'; }
+	  pre.src-verilog:before { content: 'Verilog'; }
+	  pre.src-vhdl:before { content: 'VHDL'; }
+	  pre.src-xml:before { content: 'XML'; }
+	  pre.src-nxml:before { content: 'XML'; }
+	  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+	  pre.src-conf:before { content: 'Configuration File'; }
+
+	  table { border-collapse:collapse; }
+	  caption.t-above { caption-side: top; }
+	  caption.t-bottom { caption-side: bottom; }
+	  td, th { vertical-align:top;  }
+	  th.org-right  { text-align: center;  }
+	  th.org-left   { text-align: center;   }
+	  th.org-center { text-align: center; }
+	  td.org-right  { text-align: right;  }
+	  td.org-left   { text-align: left;   }
+	  td.org-center { text-align: center; }
+	  dt { font-weight: bold; }
+	  .footpara { display: inline; }
+	  .footdef  { margin-bottom: 1em; }
+	  .figure { padding: 1em; }
+	  .figure p { text-align: center; }
+	  .inlinetask {
+		  padding: 10px;
+		  border: 2px solid gray;
+		  margin: 10px;
+		  background: #ffffcc;
+	  }
+	  #org-div-home-and-up
+	  { text-align: right; font-size: 70%; white-space: nowrap; }
+	  textarea { overflow-x: auto; }
+	  .linenr { font-size: smaller }
+	  .code-highlighted { background-color: #ffff00; }
+	  .org-info-js_info-navigation { border-style: none; }
+	  #org-info-js_console-label
+      { font-size: 10px; font-weight: bold; white-space: nowrap; }
+	  .org-info-js_search-highlight
+      { background-color: #ffff00; color: #000000; font-weight: bold; }
+	  .org-svg { width: 90%; }
+	  /*]]>*/-->
+	</style>
+	<script type="text/javascript">
+	  /*
+	   @licstart  The following is the entire license notice for the
+	   JavaScript code in this tag.
+
+	   Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+	   The JavaScript code in this tag is free software: you can
+	   redistribute it and/or modify it under the terms of the GNU
+	   General Public License (GNU GPL) as published by the Free Software
+	   Foundation, either version 3 of the License, or (at your option)
+	   any later version.  The code is distributed WITHOUT ANY WARRANTY;
+	   without even the implied warranty of MERCHANTABILITY or FITNESS
+	   FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+	   As additional permission under GNU GPL version 3 section 7, you
+	   may distribute non-source (e.g., minimized or compacted) forms of
+	   that code without the copy of the GNU GPL normally required by
+	   section 4, provided you include this license notice and a URL
+	   through which recipients can access the Corresponding Source.
+
+
+	   @licend  The above is the entire license notice
+	   for the JavaScript code in this tag.
+	  */
+	<!--/*--><![CDATA[/*><!--*/
+	  function CodeHighlightOn(elem, id)
+	  {
+		  var target = document.getElementById(id);
+		  if(null != target) {
+			  elem.cacheClassElem = elem.className;
+			  elem.cacheClassTarget = target.className;
+			  target.className = "code-highlighted";
+			  elem.className   = "code-highlighted";
+		  }
+	  }
+	  function CodeHighlightOff(elem, id)
+	  {
+		  var target = document.getElementById(id);
+		  if(elem.cacheClassElem)
+			  elem.className = elem.cacheClassElem;
+		  if(elem.cacheClassTarget)
+			  target.className = elem.cacheClassTarget;
+	  }
+	  /*]]>*///-->
+	</script>
+  </head>
+  <body>
+	<div id="content">
+	  <div id="table-of-contents">
+		<h1>Table of Contents</h1>
+		<div id="text-table-of-contents">
+		  <ul>
+			<li><a href="#org6420b39">1. Intro</a>
+			  <ul>
+				<li><a href="#orgd341370">1.1. Foreword</a></li>
+				<li><a href="#orgd481018">1.2. State of the coder</a></li>
+				<li><a href="#org24eac16">1.3. Purpose</a></li>
+			  </ul>
+			</li>
+			<li><a href="#org6c01b5f">2. Install instruction for this litterate programm</a>
+			  <ul>
+				<li><a href="#org8051d48">2.1. What is litterate programming ?</a></li>
+				<li><a href="#orgd616d59">2.2. Org babel</a></li>
+				<li><a href="#org968cd8a">2.3. Export Org File</a></li>
+				<li><a href="#org647d52d">2.4. Other exports</a>
+				  <ul>
+					<li><a href="#org07e06c8">2.4.1. <span class="todo TODO">TODO</span> How to export this org file to a python package ?</a></li>
+					<li><a href="#orgf7e3336">2.4.2. <span class="todo TODO">TODO</span> How to export this org file to a jupyter notebook ?</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</li>
+			<li><a href="#org33e808a">3. Code</a>
+			  <ul>
+				<li><a href="#org5ccfc2b">3.1. Overview</a>
+				  <ul>
+					<li><a href="#org08e025f">3.1.1. traditionnal programming perspective</a></li>
+					<li><a href="#org365e0f0">3.1.2. litterate programming perspective</a></li>
+				  </ul>
+				</li>
+				<li><a href="#org14d8856">3.2. Let's get started</a>
+				  <ul>
+					<li><a href="#orgd7cf879">3.2.1. Server</a></li>
+					<li><a href="#org31e075b">3.2.2. Data</a></li>
+					<li><a href="#orgd4ac342">3.2.3. Feed</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</li>
+			<li><a href="#org6ba06ed">4. Appendices</a>
+			  <ul>
+				<li><a href="#org9718f56">4.1. Org Tangle</a>
+				  <ul>
+					<li><a href="#org9f51d58">4.1.1. General</a></li>
+					<li><a href="#org878fe32">4.1.2. Follow links</a></li>
+					<li><a href="#org459674d">4.1.3. Tangle according to the file system</a></li>
+					<li><a href="#orgeb2112b">4.1.4. Tangle all code blocks in a subtree to the same file</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			</li>
+		  </ul>
+		</div>
+	  </div>
+
+	  <div id="outline-container-org6420b39" class="outline-1">
+		<h1 id="org6420b39"><span class="section-number-1">1</span> Intro</h1>
+		<div class="outline-text-1" id="text-1">
+		</div>
+		<div id="outline-container-orgd341370" class="outline-2">
+		  <h2 id="orgd341370"><span class="section-number-2">1.1</span> Foreword</h2>
+		  <div class="outline-text-2" id="text-1-1">
+			<p>
+			  My aim with this programm is to have a blog on which I can publish my data science works.
+			</p>
+		  </div>
+		</div>
+
+		<div id="outline-container-orgd481018" class="outline-2">
+		  <h2 id="orgd481018"><span class="section-number-2">1.2</span> State of the coder</h2>
+		  <div class="outline-text-2" id="text-1-2">
+			<p>
+			  I already have a server running with python and mysql. I also have a domain name at ‘www.plasma.city’.
+			  I already have good notions of programming with python and basic understanding of the web, html and css.
+			</p>
+
+			<p>
+			  What I don't know though, is how to use the Flask micro-framework to build a website and deploy it on my server.
+			  Also I don't know how I can export org files to html pages of website.
+			  I would also like to add a script that publishes automaticly my articles based on a synchronisation of a folder on my local computer where I would save them.
+			</p>
+		  </div>
+		</div>
+
+		<div id="outline-container-org24eac16" class="outline-2">
+		  <h2 id="org24eac16"><span class="section-number-2">1.3</span> Purpose</h2>
+		  <div class="outline-text-2" id="text-1-3">
+			<p>
+			  So the aim of this programm is to provide an easy way to publish my work on a website. This website has to be an excellent communication tool presenting my work in a fancy way.
+			</p>
+		  </div>
+		</div>
+	  </div>
+
+	  <div id="outline-container-org6c01b5f" class="outline-1">
+		<h1 id="org6c01b5f"><span class="section-number-1">2</span> Install instruction for this litterate programm</h1>
+		<div class="outline-text-1" id="text-2">
+		</div>
+		<div id="outline-container-org8051d48" class="outline-2">
+		  <h2 id="org8051d48"><span class="section-number-2">2.1</span> What is litterate programming ?</h2>
+		  <div class="outline-text-2" id="text-2-1">
+			<p>
+			  Litterate programming is a programming method that emphasises the human reflexion over the computer understanding of your code.
+			  Hence litterate programming is know for making programms more understandable for both programmers and non-programmers.
+			  Literrate programming also has the virtue to make the documentation and design of the programm saner because it focuses on the end result and its publication.
+			</p>
+
+			<p>
+			  This is my first attemt to write a program in litterate programming fashion.
+			</p>
+		  </div>
+		</div>
+
+		<div id="outline-container-orgd616d59" class="outline-2">
+		  <h2 id="orgd616d59"><span class="section-number-2">2.2</span> Org babel</h2>
+		  <div class="outline-text-2" id="text-2-2">
+			<p>
+			  All the code was writen in an org file. Org files can be opened in Emacs using a built-in mode called org-mode. It provides a convinient way to manage a litterate programm. In org files, code is cotained in code block which are organised in org headings. These heading can have meta-data so that we can use meta-programming to manage our code automaticly.
+			</p>
+		  </div>
+		</div>
+
+		<div id="outline-container-org968cd8a" class="outline-2">
+		  <h2 id="org968cd8a"><span class="section-number-2">2.3</span> Export Org File</h2>
+		  <div class="outline-text-2" id="text-2-3">
+			<p>
+			  You can download the org file and run it in emacs. Once you are in emacs org-mode visiting the file in a buffer, you can export the code contained in this org file to a full python module. This action is called tangling in litterate programming.
+			</p>
+		  </div>
+		</div>
+
+
+		<div id="outline-container-org647d52d" class="outline-2">
+		  <h2 id="org647d52d"><span class="section-number-2">2.4</span> Other exports</h2>
+		  <div class="outline-text-2" id="text-2-4">
+			<p>
+			  For compatibility with other work environements, I also exported the org files as a python package and as a jupyter notebook. You can also generate those easily by downloading the org file and exporting it in org-mode.
+			</p>
+		  </div>
+
+		  <div id="outline-container-org07e06c8" class="outline-3">
+			<h3 id="org07e06c8"><span class="section-number-3">2.4.1</span> <span class="todo TODO">TODO</span> How to export this org file to a python package ?</h3>
+		  </div>
+
+		  <div id="outline-container-orgf7e3336" class="outline-3">
+			<h3 id="orgf7e3336"><span class="section-number-3">2.4.2</span> <span class="todo TODO">TODO</span> How to export this org file to a jupyter notebook ?</h3>
+		  </div>
+		</div>
+	  </div>
+
+	  <div id="outline-container-org33e808a" class="outline-1">
+		<h1 id="org33e808a"><span class="section-number-1">3</span> Code</h1>
+		<div class="outline-text-1" id="text-3">
+		</div>
+		<div id="outline-container-org5ccfc2b" class="outline-2">
+		  <h2 id="org5ccfc2b"><span class="section-number-2">3.1</span> Overview</h2>
+		  <div class="outline-text-2" id="text-3-1">
+			<p>
+			  We will now write the code of our blog-website.
+			</p>
+
+			<p>
+			  There are several way of designing a programm, here are two approches.
+			</p>
+		  </div>
+
+		  <div id="outline-container-org08e025f" class="outline-3">
+			<h3 id="org08e025f"><span class="section-number-3">3.1.1</span> traditionnal programming perspective</h3>
+			<div class="outline-text-3" id="text-3-1-1">
+			  <p>
+				So, what code will wee need ?
+			  </p>
+			</div>
+
+			<ol class="org-ol">
+			  <li><a id="orge7ea7b8"></a>python flask app<br />
+				<div class="outline-text-4" id="text-3-1-1-1">
+				  <p>
+					We will need a flask app to run our server. In this we will define how we handle queries made to our server. The server will for each query send back a different output that the client will load. OFr exemple if the client is visiting the website with a webbrowser, he will send http queries and we usually want to send him html documents back.
+				  </p>
+				</div>
+			  </li>
+
+			  <li><a id="org6a7a8ff"></a>html documents<br />
+				<div class="outline-text-4" id="text-3-1-1-2">
+				  <p>
+					We need to build our skelton page. We can decide what shape the site has tp have, what parts will remain between each page, and what html code is specific to particular pages.
+				  </p>
+				</div>
+
+				<ol class="org-ol">
+				  <li><a id="org8641259"></a>templates<br />
+					<div class="outline-text-5" id="text-3-1-1-2-1">
+					  <p>
+						We will handle the generalization of page structures with templates. This will be handled by a module that is implemented in flask called ninjasomething.
+					  </p>
+
+					  <p>
+						The aim is to be able to call templates and fill them depending on context.
+					  </p>
+					</div>
+				  </li>
+
+				  <li><a id="orgb6fb099"></a>css<br />
+					<div class="outline-text-5" id="text-3-1-1-2-2">
+					  <p>
+						The generalization of page apparences will be generated by our css files.
+					  </p>
+					</div>
+				  </li>
+				</ol>
+			  </li>
+			</ol>
+		  </div>
+
+
+		  <div id="outline-container-org365e0f0" class="outline-3">
+			<h3 id="org365e0f0"><span class="section-number-3">3.1.2</span> litterate programming perspective</h3>
+			<div class="outline-text-3" id="text-3-1-2">
+			  <p>
+				So, what do we need ?
+			  </p>
+			</div>
+
+			<ol class="org-ol">
+			  <li><a id="org9b2b30d"></a>layers<br />
+				<div class="outline-text-4" id="text-3-1-2-1">
+				  <p>
+					We need to let different layers communicate together to act as a system that matches our desires
+				  </p>
+				</div>
+
+				<ol class="org-ol">
+				  <li><a id="org83320e9"></a>server program<br />
+					<div class="outline-text-5" id="text-3-1-2-1-1">
+					  <p>
+						First we want the server to deliver the our website to visitor. In html first.
+					  </p>
+					</div>
+				  </li>
+
+				  <li><a id="org1a22e4a"></a>server data<br />
+					<div class="outline-text-5" id="text-3-1-2-1-2">
+					  <p>
+						The server needs to acces the data he has to retrive.
+					  </p>
+					</div>
+				  </li>
+
+				  <li><a id="org12a4da8"></a>filling the server<br />
+					<div class="outline-text-5" id="text-3-1-2-1-3">
+					  <p>
+						We need to populate the server with local data.
+					  </p>
+					</div>
+				  </li>
+				</ol>
+			  </li>
+			</ol>
+		  </div>
+		</div>
+
+		<div id="outline-container-org14d8856" class="outline-2">
+		  <h2 id="org14d8856"><span class="section-number-2">3.2</span> Let's get started</h2>
+		  <div class="outline-text-2" id="text-3-2">
+			<p>
+			  We will choose the litterate programming perspective.
+			  So we need to build a server able to retrive html, based on available data that we feed him with.
+			</p>
+		  </div>
+
+		  <div id="outline-container-orgd7cf879" class="outline-3">
+			<h3 id="orgd7cf879"><span class="section-number-3">3.2.1</span> Server</h3>
+			<div class="outline-text-3" id="text-3-2-1">
+			</div>
+			<ol class="org-ol">
+			  <li><a id="org54539e5"></a>Flask Application<br />
+				<div class="outline-text-4" id="text-3-2-1-1">
+				  <p>
+					When we run the app, we would like to be able to access it with a browser. Let's make our server alive and talking.
+				  </p>
+
+				  <p>
+					This is this can be considered as an introduction to flask. It follows the flask quickstart page.
+				  </p>
+
+				  <p>
+					To understand how this link is managed in our final file tangling (when all the file is exported as a whole programm ready to run) please sea <a href="#org878fe32">Org Tangle Appendice</a>. You can refer to the appendice each time there is a special meta-programming code doing things you don't understand.
+				  </p>
+
+				  <p>
+					An easy way to go back and forth is to use the command C-u C-SPC to come back to the place you where before visiting the link or doing a isearch or chatever other command you used to make you jump to another position. This is a very handy tool for quick navigation. You can now jump headlessly around, you have a way to come back !
+				  </p>
+				</div>
+
+				<ol class="org-ol">
+				  <li><a id="orga68a317"></a>imports<br />
+					<div class="outline-text-5" id="text-3-2-1-1-1">
+					  <div class="org-src-container">
+						<pre class="src src-python"><span style="color: #ba55d3; font-weight: bold;">from</span> flask <span style="color: #ba55d3; font-weight: bold;">import</span> Flask
+						  <span style="color: #dbdb95;">app</span> = Flask(<span style="color: #23d7d7;">__name__</span>)
+						</pre>
+					  </div>
+					</div>
+				  </li>
+
+
+				  <li><a id="org09dd76f"></a>route<br />
+					<div class="outline-text-5" id="text-3-2-1-1-2">
+					  <p>
+						The route() function binds a function to an URL
+					  </p>
+
+					  <div class="org-src-container">
+						<pre class="src src-python"><span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">index</span>():
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> <span style="color: #e67128;">'Index Page'</span>
+						</pre>
+					  </div>
+					</div>
+				  </li>
+
+				  <li><a id="org46b64c7"></a>rules variables<br />
+					<div class="outline-text-5" id="text-3-2-1-1-3">
+					  <p>
+						You can add variable sections to a URL by marking sections with &lt;variable<sub>name</sub>&gt;. Your function then receives the
+						&lt;variable<sub>name</sub>&gt; as a keyword argument.
+					  </p>
+
+					  <p>
+						Optionally, you can use a converter to specify the type of the argument like
+						&lt;converter:variable<sub>name</sub>&gt;
+					  </p>
+
+					  <div class="org-src-container">
+						<pre class="src src-python"><span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/user/&lt;username&gt;'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">show_user_profile</span>(username):
+						  <span style="color: #74af68;"># </span><span style="color: #74af68;">show the user profile for that user</span>
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> <span style="color: #e67128;">'User %s'</span> % username
+
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/post/&lt;int:post_id&gt;'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">show_post</span>(post_id):
+						  <span style="color: #74af68;"># </span><span style="color: #74af68;">show the post with the given id, the id is an integer</span>
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> <span style="color: #e67128;">'Post %d'</span> % post_id
+
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/path/&lt;path:subpath&gt;'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">show_subpath</span>(subpath):
+						  <span style="color: #74af68;"># </span><span style="color: #74af68;">show the subpath after /path/</span>
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> <span style="color: #e67128;">'Subpath %s'</span> % subpath
+						</pre>
+					  </div>
+					</div>
+				  </li>
+
+
+				  <li><a id="orge87fb7c"></a>URL building<br />
+					<div class="outline-text-5" id="text-3-2-1-1-4">
+					  <div class="org-src-container">
+						<pre class="src src-python">
+						  <span style="color: #ba55d3; font-weight: bold;">from</span> flask <span style="color: #ba55d3; font-weight: bold;">import</span> url_for
+
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/login'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">login</span>():
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> <span style="color: #e67128;">'login'</span>
+
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/usr/&lt;username&gt;'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">profile</span>(username):
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> <span style="color: #e67128;">'{}\'s profile'</span>.<span style="color: #23d7d7;">format</span>(username)
+
+						  <span style="color: #ba55d3; font-weight: bold;">with</span> app.test_request_context():
+						  <span style="color: #ba55d3; font-weight: bold;">print</span>(url_for(<span style="color: #e67128;">'index'</span>))
+						  <span style="color: #ba55d3; font-weight: bold;">print</span>(url_for(<span style="color: #e67128;">'login'</span>))
+						  <span style="color: #ba55d3; font-weight: bold;">print</span>(url_for(<span style="color: #e67128;">'login'</span>, <span style="color: #23d7d7;">next</span>=<span style="color: #e67128;">'/'</span>))
+						  <span style="color: #ba55d3; font-weight: bold;">print</span>(url_for(<span style="color: #e67128;">'profile'</span>, username=<span style="color: #e67128;">'John Doe'</span>))
+
+						</pre>
+					  </div>
+					</div>
+				  </li>
+
+				  <li><a id="org9afa643"></a>rendering templates<br />
+					<div class="outline-text-5" id="text-3-2-1-1-5">
+					  <div class="org-src-container">
+						<pre class="src src-python">
+						  <span style="color: #ba55d3; font-weight: bold;">from</span> flask <span style="color: #ba55d3; font-weight: bold;">import</span> render_template
+
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/hello/'</span>)
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/hello/&lt;name&gt;'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">hello</span>(name=<span style="color: #008b8b;">None</span>):
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> render_template(<span style="color: #e67128;">'hello.html'</span>, name=name)
+
+						</pre>
+					  </div>
+					</div>
+				  </li>
+
+				  <li><a id="orge7afdae"></a>htmlfontify emacs function<br />
+					<div class="outline-text-5" id="text-3-2-1-1-6">
+					  <div class="org-src-container">
+						<pre class="src src-python">
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/codex/'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">codex</span>():
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> render_template(<span style="color: #e67128;">'codex.html'</span>)
+
+						  <span style="color: #34cae2;">@app.route</span>(<span style="color: #e67128;">'/hello-ob/'</span>)
+						  <span style="color: #ba55d3; font-weight: bold;">def</span> <span style="color: #00ede1; font-weight: bold;">hello_ob</span>():
+						  <span style="color: #ba55d3; font-weight: bold;">return</span> render_template(<span style="color: #e67128;">'hello-ob.html'</span>)
+
+						</pre>
+					  </div>
+					</div>
+				  </li>
+				</ol>
+			  </li>
+			  <li><a id="orgfdb4851"></a>Python package ?<br />
+				<div class="outline-text-4" id="text-3-2-1-2">
+				  <p>
+					Create an <span class="underline"><span class="underline">init</span></span>.py file to redirect to our app
+				  </p>
+
+				  <p>
+					or keep a module and change the setup.py file.
+				  </p>
+
+				  <div class="org-src-container">
+					<pre class="src src-python">
+					  <span style="color: #ba55d3; font-weight: bold;">pass</span>
+
+					</pre>
+				  </div>
+				</div>
+			  </li>
+
+			  <li><a id="org801ef85"></a>Deployment<br />
+				<div class="outline-text-4" id="text-3-2-1-3">
+				  <p>
+					Now the server works localy, let's try to put it on my distant server. Let's take a look at what the flask doc says about it.
+				  </p>
+
+				  <p>
+					<a href="http://flask.pocoo.org/docs/1.0/tutorial/install/">http://flask.pocoo.org/docs/1.0/tutorial/install/</a>
+				  </p>
+				</div>
+
+				<ol class="org-ol">
+				  <li><a id="org1374c1e"></a>Intallation<br />
+					<div class="outline-text-5" id="text-3-2-1-3-1">
+					  <div class="org-src-container">
+						<pre class="src src-python">
+						  <span style="color: #ba55d3; font-weight: bold;">from</span> setuptools <span style="color: #ba55d3; font-weight: bold;">import</span> find_packages, setup
+
+						  setup(
+						  name=<span style="color: #e67128;">'plasma-city'</span>,
+						  version=<span style="color: #e67128;">'1.0.0'</span>,
+						  packages=find_packages(),
+						  include_package_data=<span style="color: #008b8b;">True</span>,
+						  zip_safe=<span style="color: #008b8b;">False</span>,
+						  install_requires=[
+						  <span style="color: #e67128;">'flask'</span>,
+						  ],
+						  )
+
+						</pre>
+					  </div>
+
+					  <div class="org-src-container">
+						<pre class="src src-include">
+						  graft plasma-city/static
+						  graft plasma-city/templates
+						  global-exclude *.pyc
+
+						</pre>
+					  </div>
+
+					  <p>
+						run pip install -e .
+					  </p>
+					</div>
+				  </li>
+
+				  <li><a id="org8298955"></a>Deploy<br />
+					<div class="outline-text-5" id="text-3-2-1-3-2">
+					  <p>
+						get an ssh key / add key on the server
+					  </p>
+
+					  <p>
+						copy wheel to the server
+					  </p>
+
+					  <p>
+						run python setup.py bdist<sub>wheel</sub>
+					  </p>
+					</div>
+				  </li>
+				</ol>
+			  </li>
+			</ol>
+		  </div>
+
+		  <div id="outline-container-org31e075b" class="outline-3">
+			<h3 id="org31e075b"><span class="section-number-3">3.2.2</span> Data</h3>
+			<div class="outline-text-3" id="text-3-2-2">
+			  <p>
+				So now our server can send data that can be viewed in a browser.
+			  </p>
+
+			  <p>
+				What do we now want the visitor to sea ? Obviously our articles. Maybe a mainpage containg all articles. Maybe a side bar. All this can be generated by templates.
+			  </p>
+
+			  <p>
+				We now have to learn about Flask's sidekick : jinja.
+			  </p>
+			</div>
+
+			<ol class="org-ol">
+			  <li><a id="org853428f"></a>jinja tutorial<br />
+				<div class="outline-text-4" id="text-3-2-2-1">
+				  <p>
+					We want to have
+				  </p>
+				</div>
+			  </li>
+			</ol>
+		  </div>
+
+		  <div id="outline-container-orgd4ac342" class="outline-3">
+			<h3 id="orgd4ac342"><span class="section-number-3">3.2.3</span> Feed</h3>
+		  </div>
+		</div>
+	  </div>
+
+
+
+	  <div id="outline-container-org6ba06ed" class="outline-1">
+		<h1 id="org6ba06ed"><span class="section-number-1">4</span> Appendices</h1>
+		<div class="outline-text-1" id="text-4">
+		</div>
+		<div id="outline-container-org9718f56" class="outline-2">
+		  <h2 id="org9718f56"><span class="section-number-2">4.1</span> Org Tangle</h2>
+		  <div class="outline-text-2" id="text-4-1">
+		  </div>
+		  <div id="outline-container-org9f51d58" class="outline-3">
+			<h3 id="org9f51d58"><span class="section-number-3">4.1.1</span> General</h3>
+			<div class="outline-text-3" id="text-4-1-1">
+			  <p>
+				We will need to be able to tangle the code in this org file to the expected files. Why not even have the html code contained in this file so that everything is accessible on a signle page ?
+				For this to work the way we want, we need to make sure that in the tangling process, each source code block is exported so that the outcome is a nice organised directory. This can be done by defining properties to source block header and defining rules that will tangle deferent properties differently.
+			  </p>
+			</div>
+		  </div>
+
+		  <div id="outline-container-org878fe32" class="outline-3">
+			<h3 id="org878fe32"><span class="section-number-3">4.1.2</span> Follow links</h3>
+			<div class="outline-text-3" id="text-4-1-2">
+			  <p>
+				We did not wanted to separate the code in different files. But it could have been done so for convinience. But since the org file view is modulable, why would we need to ?
+			  </p>
+
+			  <p>
+				There is such a possibility though, that the tangling process follows links and do some specific action on the encountered file. It can be very powerfull in other context.
+			  </p>
+
+			  <p>
+				To figure this out, one should check John Kitchin's work on his blog and github page.
+			  </p>
+			</div>
+		  </div>
+
+		  <div id="outline-container-org459674d" class="outline-3">
+			<h3 id="org459674d"><span class="section-number-3">4.1.3</span> Tangle according to the file system</h3>
+			<div class="outline-text-3" id="text-4-1-3">
+			  <p>
+				We want org to tangle the different code blocks in this file in specific locations in our project directory. This can be done by adding to the "header-args" property the value ":tangle "path/to/our/file/directory/file-name.file-extension" "
+			  </p>
+
+			  <p>
+				Note that we need to specify an extension because we are not givin the value "yes" to :tangle, so the tangling process awaits from us that we specify path, file name and extension.
+			  </p>
+			</div>
+		  </div>
+		  <div id="outline-container-orgeb2112b" class="outline-3">
+			<h3 id="orgeb2112b"><span class="section-number-3">4.1.4</span> Tangle all code blocks in a subtree to the same file</h3>
+			<div class="outline-text-3" id="text-4-1-4">
+			  <p>
+				In order to do this, we need to add a property to the headline whose children we want to have the same output file. To set a property C-c C-x p can help. Now we define a header-args property with value ":tangle path/to/our/file/file-name.filext"
+			  </p>
+
+			  <p>
+				In order to make this work, we need to able properties inheritance and add the property header-args to the list of inheretable properties.
+			  </p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div id="postamble" class="status">
+	  <p class="author">Author: teddd</p>
+	  <p class="date">Created: 2018-08-04 sam. 00:18</p>
+	  <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+	</div>
+  </body>
+</html>

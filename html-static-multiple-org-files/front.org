@@ -1,0 +1,8 @@
+* This is the front page
+** some content
+** other content
+[[file:second.org][second page]]
+* Another Title
+** some content
+** other content with image
+[[file:img/13872473_10154359959456484_1991263323.gif][lol]]

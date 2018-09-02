@@ -1,0 +1,7 @@
+* This is the second page
+** some content
+[[file:front.org][front]]
+** other content
+* Another Title
+** some content
+** other content
