@@ -4,7 +4,7 @@
 * Intro
 
 ** Foreword
-My aim with this programm is to have a blog on which I can publish my data science works.
+My aim with this programm is to build a blog on which I can publish my  works.
 
 ** State of the coder
 I already have a server running with python and mysql. I also have a domain name at ‘www.plasma.city’.
@@ -253,7 +253,7 @@ These are the requirements :
 
 ******* A propos
 **** Publishing : Html pages generation with org export
-***** TODO how to make links relevant and generated automaticly ?
+***** how to make links relevant and generated automaticly ?
 :LOGBOOK:
 CLOCK: [2018-09-01 sam. 17:52]
 :END:
@@ -289,17 +289,22 @@ CLOSED: [2018-09-02 dim. 17:16]
 - State "CANCELED"   from              [2018-09-02 dim. 17:16] \\
   Better create a little script in lisp or python beside.
 :END:
-********** TODO publish in templates and create a script to jinjaify it afterwards
+********** publish in templates and create a script to jinjaify it afterwards
 ***** articles / pages
 ****** export html files for each project in this templates directory ?
 ****** treat each html file separatly ?
 ****** work with a more modular system using js/DOM ?
-**** jinja tutorial
+*** TODO Optimization
+**** home page
+***** automatize generation of links to the articles
+***** make pretty
+**** articles
+***** put a link to the home page when publishing
+**** TODO use templates
 We now have to learn about Flask's sidekick : jinja.
 We could use it to build links between template pages.
-**** css ?
-***** relationship with org mode ?
-*** Final deployment with content
+**** TODO css ?
+***** TODO relationship with org mode ?
 * Appendices
 
 ** Org Tangle
