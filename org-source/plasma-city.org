@@ -294,17 +294,178 @@ CLOSED: [2018-09-02 dim. 17:16]
 ****** export html files for each project in this templates directory ?
 ****** treat each html file separatly ?
 ****** work with a more modular system using js/DOM ?
+
+*** Deployment
+Following the instructions of gandi : Use git and ssh
+**** TODO crash
+***** uwsgi
+Sun Sep  9 15:40:42 2018 - ...gracefully killing workers...
+Sun Sep  9 15:40:42 2018 - Gracefully killing worker 1 (pid: 120398)...
+Sun Sep  9 15:40:42 2018 - Gracefully killing worker 2 (pid: 120399)...
+Sun Sep  9 15:40:43 2018 - worker 1 buried after 1 seconds
+Sun Sep  9 15:40:43 2018 - worker 2 buried after 1 seconds
+Sun Sep  9 15:40:43 2018 - binary reloading uWSGI...
+Sun Sep  9 15:40:43 2018 - chdir() to /srv/data/home
+Sun Sep  9 15:40:43 2018 - closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+Sun Sep  9 15:40:43 2018 - found fd 3 mapped to socket 0 (/run/uwsgi/uwsgi.sock)
+Sun Sep  9 15:40:43 2018 - found fd 4 mapped to socket 1 (127.0.0.1:8080)
+Sun Sep  9 15:40:43 2018 - running /opt/uwsgi-2.0.15-201801231818/uwsgi
+[uWSGI] getting INI configuration from /srv/data/.config/uwsgi/uwsgi.ini
+[uWSGI] getting INI configuration from /srv/admin/configs/uwsgi/base/uwsgi.ini
+[uWSGI] getting INI configuration from /srv/admin/configs/uwsgi/base/python3.6.ini
+[uWSGI] getting INI configuration from /srv/admin/configs/uwsgi/base/python.ini
+Sun Sep  9 15:40:43 2018 - *** Starting uWSGI 2.0.15 (64bit) on [Sun Sep  9 15:40:43 2018] ***
+Sun Sep  9 15:40:43 2018 - compiled with version: 4.9.2 on 23 January 2018 17:19:18
+Sun Sep  9 15:40:43 2018 - os: Linux-4.9.76-paas-7c3574c #1 SMP PREEMPT Wed Jan 10 13:17:54 CET 2018
+Sun Sep  9 15:40:43 2018 - nodename: serveur_plasma_city
+Sun Sep  9 15:40:43 2018 - machine: x86_64
+Sun Sep  9 15:40:43 2018 - clock source: unix
+Sun Sep  9 15:40:43 2018 - detected number of CPU cores: 32
+Sun Sep  9 15:40:43 2018 - current working directory: /srv/data/home
+Sun Sep  9 15:40:43 2018 - detected binary path: /opt/uwsgi-2.0.15-201801231818/uwsgi
+Sun Sep  9 15:40:43 2018 - !!! no internal routing support, rebuild with pcre support !!!
+Sun Sep  9 15:40:43 2018 - chdir() to /srv/data/web/vhosts/default
+Sun Sep  9 15:40:43 2018 - your processes number limit is 513586
+Sun Sep  9 15:40:43 2018 - your memory page size is 4096 bytes
+Sun Sep  9 15:40:43 2018 - detected max file descriptor number: 1024
+Sun Sep  9 15:40:43 2018 - lock engine: pthread robust mutexes
+Sun Sep  9 15:40:43 2018 - thunder lock: disabled (you can enable it with --thunder-lock)
+Sun Sep  9 15:40:43 2018 - uwsgi socket 0 inherited UNIX address /run/uwsgi/uwsgi.sock fd 3
+Sun Sep  9 15:40:43 2018 - uwsgi socket 1 inherited INET address 127.0.0.1:8080 fd 4
+Sun Sep  9 15:40:43 2018 - Python version: 3.6.4 (default, Jan 23 2018, 16:35:20)  [GCC 4.9.2]
+Sun Sep  9 15:40:43 2018 - Set PythonHome to /srv/data/web/vhosts/default/local
+Sun Sep  9 15:40:43 2018 - *** Python threads support is disabled. You can enable it with --enable-threads ***
+Sun Sep  9 15:40:43 2018 - Python main interpreter initialized at 0x10d4750
+Sun Sep  9 15:40:43 2018 - your server socket listen backlog is limited to 100 connections
+Sun Sep  9 15:40:43 2018 - your mercy for graceful operations on workers is 60 seconds
+Sun Sep  9 15:40:43 2018 - mapped 218280 bytes (213 KB) for 2 cores
+Sun Sep  9 15:40:43 2018 - *** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "/srv/data/web/vhosts/default/wsgi.py", line 1, in <module>
+    from flaskapp import app as application
+  File "./flaskapp.py", line 1, in <module>
+    from flask import Flask
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/flask/__init__.py", line 19, in <module>
+    from jinja2 import Markup, escape
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/jinja2/__init__.py", line 82, in <module>
+    _patch_async()
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/jinja2/__init__.py", line 78, in _patch_async
+    from jinja2.asyncsupport import patch_all
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 13, in <module>
+    import asyncio
+  File "/opt/python-3.6/usr/lib/python3.6/asyncio/__init__.py", line 21, in <module>
+    from .base_events import *
+  File "/opt/python-3.6/usr/lib/python3.6/asyncio/base_events.py", line 17, in <module>
+    import concurrent.futures
+  File "/opt/python-3.6/usr/lib/python3.6/concurrent/futures/__init__.py", line 17, in <module>
+    from concurrent.futures.process import ProcessPoolExecutor
+  File "/opt/python-3.6/usr/lib/python3.6/concurrent/futures/process.py", line 55, in <module>
+    from multiprocessing.connection import wait
+  File "/opt/python-3.6/usr/lib/python3.6/multiprocessing/connection.py", line 23, in <module>
+    from . import util
+  File "/opt/python-3.6/usr/lib/python3.6/multiprocessing/util.py", line 17, in <module>
+    from subprocess import _args_from_interpreter_flags
+  File "/opt/python-3.6/usr/lib/python3.6/subprocess.py", line 136, in <module>
+    import _posixsubprocess
+ImportError: /srv/data/web/vhosts/default/local/lib/python3.6/lib-dynload/_posixsubprocess.cpython-36m-x86_64-linux-gnu.so: undefined symbol: _Py_set_inheritable_async_safe
+Sun Sep  9 15:40:43 2018 - unable to load app 0 (mountpoint='') (callable not found or import error)
+Sun Sep  9 15:40:43 2018 - *** no app loaded. going in full dynamic mode ***
+Sun Sep  9 15:40:43 2018 - *** uWSGI is running in multiple interpreter mode ***
+Sun Sep  9 15:40:43 2018 - gracefully (RE)spawned uWSGI master process (pid: 178)
+Sun Sep  9 15:40:43 2018 - spawned uWSGI worker 1 (pid: 120493, cores: 1)
+Sun Sep  9 15:40:43 2018 - spawned uWSGI worker 2 (pid: 120494, cores: 1)
+Sun Sep  9 15:41:04 2018 - ...gracefully killing workers...
+Sun Sep  9 15:41:04 2018 - Gracefully killing worker 1 (pid: 120493)...
+Sun Sep  9 15:41:04 2018 - Gracefully killing worker 2 (pid: 120494)...
+Sun Sep  9 15:41:05 2018 - worker 1 buried after 1 seconds
+Sun Sep  9 15:41:05 2018 - worker 2 buried after 1 seconds
+Sun Sep  9 15:41:05 2018 - binary reloading uWSGI...
+Sun Sep  9 15:41:05 2018 - chdir() to /srv/data/home
+Sun Sep  9 15:41:05 2018 - closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+Sun Sep  9 15:41:05 2018 - found fd 3 mapped to socket 0 (/run/uwsgi/uwsgi.sock)
+Sun Sep  9 15:41:05 2018 - found fd 4 mapped to socket 1 (127.0.0.1:8080)
+Sun Sep  9 15:41:05 2018 - running /opt/uwsgi-2.0.15-201801231818/uwsgi
+[uWSGI] getting INI configuration from /srv/data/.config/uwsgi/uwsgi.ini
+[uWSGI] getting INI configuration from /srv/admin/configs/uwsgi/base/uwsgi.ini
+[uWSGI] getting INI configuration from /srv/admin/configs/uwsgi/base/python3.6.ini
+[uWSGI] getting INI configuration from /srv/admin/configs/uwsgi/base/python.ini
+Sun Sep  9 15:41:05 2018 - *** Starting uWSGI 2.0.15 (64bit) on [Sun Sep  9 15:41:05 2018] ***
+Sun Sep  9 15:41:05 2018 - compiled with version: 4.9.2 on 23 January 2018 17:19:18
+Sun Sep  9 15:41:05 2018 - os: Linux-4.9.76-paas-7c3574c #1 SMP PREEMPT Wed Jan 10 13:17:54 CET 2018
+Sun Sep  9 15:41:05 2018 - nodename: serveur_plasma_city
+Sun Sep  9 15:41:05 2018 - machine: x86_64
+Sun Sep  9 15:41:05 2018 - clock source: unix
+Sun Sep  9 15:41:05 2018 - detected number of CPU cores: 32
+Sun Sep  9 15:41:05 2018 - current working directory: /srv/data/home
+Sun Sep  9 15:41:05 2018 - detected binary path: /opt/uwsgi-2.0.15-201801231818/uwsgi
+Sun Sep  9 15:41:05 2018 - !!! no internal routing support, rebuild with pcre support !!!
+Sun Sep  9 15:41:05 2018 - chdir() to /srv/data/web/vhosts/default
+Sun Sep  9 15:41:05 2018 - your processes number limit is 513586
+Sun Sep  9 15:41:05 2018 - your memory page size is 4096 bytes
+Sun Sep  9 15:41:05 2018 - detected max file descriptor number: 1024
+Sun Sep  9 15:41:05 2018 - lock engine: pthread robust mutexes
+Sun Sep  9 15:41:05 2018 - thunder lock: disabled (you can enable it with --thunder-lock)
+Sun Sep  9 15:41:05 2018 - uwsgi socket 0 inherited UNIX address /run/uwsgi/uwsgi.sock fd 3
+Sun Sep  9 15:41:05 2018 - uwsgi socket 1 inherited INET address 127.0.0.1:8080 fd 4
+Sun Sep  9 15:41:05 2018 - Python version: 3.6.4 (default, Jan 23 2018, 16:35:20)  [GCC 4.9.2]
+Sun Sep  9 15:41:05 2018 - Set PythonHome to /srv/data/web/vhosts/default/local
+Sun Sep  9 15:41:05 2018 - *** Python threads support is disabled. You can enable it with --enable-threads ***
+Sun Sep  9 15:41:05 2018 - Python main interpreter initialized at 0x1af6750
+Sun Sep  9 15:41:05 2018 - your server socket listen backlog is limited to 100 connections
+Sun Sep  9 15:41:05 2018 - your mercy for graceful operations on workers is 60 seconds
+Sun Sep  9 15:41:05 2018 - mapped 218280 bytes (213 KB) for 2 cores
+Sun Sep  9 15:41:05 2018 - *** Operational MODE: preforking ***
+Traceback (most recent call last):
+  File "/srv/data/web/vhosts/default/wsgi.py", line 1, in <module>
+    from flaskapp import app as application
+  File "./flaskapp.py", line 1, in <module>
+    from flask import Flask
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/flask/__init__.py", line 19, in <module>
+    from jinja2 import Markup, escape
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/jinja2/__init__.py", line 82, in <module>
+    _patch_async()
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/jinja2/__init__.py", line 78, in _patch_async
+    from jinja2.asyncsupport import patch_all
+  File "/srv/data/web/vhosts/default/local/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 13, in <module>
+    import asyncio
+  File "/opt/python-3.6/usr/lib/python3.6/asyncio/__init__.py", line 21, in <module>
+    from .base_events import *
+  File "/opt/python-3.6/usr/lib/python3.6/asyncio/base_events.py", line 17, in <module>
+    import concurrent.futures
+  File "/opt/python-3.6/usr/lib/python3.6/concurrent/futures/__init__.py", line 17, in <module>
+    from concurrent.futures.process import ProcessPoolExecutor
+  File "/opt/python-3.6/usr/lib/python3.6/concurrent/futures/process.py", line 55, in <module>
+    from multiprocessing.connection import wait
+  File "/opt/python-3.6/usr/lib/python3.6/multiprocessing/connection.py", line 23, in <module>
+    from . import util
+  File "/opt/python-3.6/usr/lib/python3.6/multiprocessing/util.py", line 17, in <module>
+    from subprocess import _args_from_interpreter_flags
+  File "/opt/python-3.6/usr/lib/python3.6/subprocess.py", line 136, in <module>
+    import _posixsubprocess
+ImportError: /srv/data/web/vhosts/default/local/lib/python3.6/lib-dynload/_posixsubprocess.cpython-36m-x86_64-linux-gnu.so: undefined symbol: _Py_set_inheritable_async_safe
+Sun Sep  9 15:41:05 2018 - unable to load app 0 (mountpoint='') (callable not found or import error)
+Sun Sep  9 15:41:05 2018 - *** no app loaded. going in full dynamic mode ***
+Sun Sep  9 15:41:05 2018 - *** uWSGI is running in multiple interpreter mode ***
+Sun Sep  9 15:41:05 2018 - gracefully (RE)spawned uWSGI master process (pid: 178)
+Sun Sep  9 15:41:05 2018 - spawned uWSGI worker 1 (pid: 120496, cores: 1)
+Sun Sep  9 15:41:05 2018 - spawned uWSGI worker 2 (pid: 120497, cores: 1)
+Sun Sep  9 15:41:12 2018 - --- no python application found, check your startup logs for errors ---
+***** delete jinja ?
+***** find another hosting solution ?
 *** TODO Optimization
 **** home page
 ***** automatize generation of links to the articles
 ***** make pretty
 **** articles
 ***** put a link to the home page when publishing
-**** TODO use templates
+**** use templates
 We now have to learn about Flask's sidekick : jinja.
 We could use it to build links between template pages.
-**** TODO css ?
-***** TODO relationship with org mode ?
+**** css ?
+***** How can org mode exports take it into account ?
+**** write a side program to do all the optimizations ? (in python or eslip ?)
+**** automate deployment
+**** use ftp to change files on the server?
 * Appendices
 
 ** Org Tangle

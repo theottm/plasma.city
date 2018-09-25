@@ -1,0 +1,78 @@
+* programm
+:PROPERTIES:
+:header-args: :session homepage
+:END:
+** imports
+#+BEGIN_SRC ipython
+from yattag import Doc
+#+END_SRC
+
+#+RESULTS:
+: # Out[68]:
+** text
+#+BEGIN_SRC ipython
+greeting = "Welcome to the Plasma City"
+info = "This is Théo Tyburn's peronnal, professional and experimental website"
+disclaimer = "This website is under active construction, please wear a helmet while browsing."
+tags = "Computer Art, Data Science, UNIX"
+link = " : my Data Science project"
+#+END_SRC
+
+#+RESULTS:
+: # Out[69]:
+** html
+#+BEGIN_SRC ipython :results html
+doc, tag, text = Doc().tagtext()
+
+doc.asis('<meta charset="UTF-8">')
+
+with tag("html", lang="en"):
+    with tag("head"):
+        doc.asis('<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />')
+        doc.stag("meta", name="viewport", content="width=device-width, initial-scale=1")
+        doc.stag("meta", name="author", content="teddd")
+        with tag("title"):
+            text(greeting)
+        with tag("style", type="text/css"):
+            text("".join(["body {display: inline-block; margin: auto auto; text-align: center;}",
+                         "html {text-align: center;}"]))
+    with tag("body"):
+        with tag("h1"):
+            text(greeting)
+        with tag("div"):
+            text(info)
+        doc.stag("li")
+        with tag("div"):
+            text(tags)
+        doc.stag("li")        
+        with tag("div"):
+            text(disclaimer)
+        doc.stag("li")
+        with tag("div"):
+            with tag("a", href="/static/jobseeker.html"):
+                text("Jobseeker")
+            text(link)
+        
+html = doc.getvalue()
+html
+
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_EXPORT html
+# Out[70]:
+: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta content="width=device-width, initial-scale=1" name="viewport" /><meta content="teddd" name="author" /><title>Welcome to the Plasma City</title><style type="text/css">body {display: inline-block; margin: auto auto; text-align: center;}html {text-align: center;}</style></head><body><h1>Welcome to the Plasma City</h1><div>This is Théo Tyburn\'s peronnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="/static/jobseeker.html">Jobseeker</a> : my Data Science project</div></body></html>'
+#+END_EXPORT
+** export
+#+BEGIN_SRC ipython
+with open("homepage.html", "w") as file: 
+    file.write(html)              
+#+END_SRC
+
+#+RESULTS:
+: # Out[71]:
+
+* center text
+* add background
+** P5.js
+

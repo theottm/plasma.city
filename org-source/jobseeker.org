@@ -1,0 +1,774 @@
+* Project description
+** General Description
+Find jobs
+*** Use
+**** [#A] target opportunities
+***** sheets of wanted words
+***** query matching algorithms
+**** [#A] data exploration
+**** [#B] cluster
+***** nlp
+**** [#B] find jobs I didn't know about
+**** get warned if new opportunities
+**** use it as a model for finding my perfect match in the world / exploring the economy
+**** make it open source and useable by anyone
+*** Features
+**** Update
+**** Clustering
+**** Visualization
+** Plan
+*** Ebay jobs quick scrap
+**** Think about it while normal digging
+**** Build a simple tool to access the info offline and stay up to date
+**** List the wanted features and their learning prerequisites
+*** Blogging
+**** Org babel
+**** Website
+*** Courses
+**** Databases
+**** Visualization
+**** Machine learning
+**** NLP
+**** Hash tables / numpy computation
+**** Proba / stats
+*** Jobs seeker
+** Implementation
+*** Start a clean project
+**** TODO git
+***** a branch per functionality
+**** TODO projectile
+**** file system
+***** /
+****** org
+****** scraper
+****** database
+****** explorer
+**** database
+***** sql ?
+***** csv ?
+**** org babel file / emacs env
+***** snippets
+C-c & ...
+Tables
+C-c C-t is snippet mode for test
+***** TODO track time
+:LOGBOOK:
+CLOCK: [2018-08-21 mar. 13:59]--[2018-08-21 mar. 14:08] =>  0:09
+:END:
+***** track habits
+:LOGBOOK:
+CLOCK: [2018-08-21 mar. 14:14]--[2018-08-21 mar. 15:29] =>  1:15
+:END:
+***** decide what goes public and what does not at expension
+* Explorer
+  :PROPERTIES:
+  :header-args: :session explorer :results raw drawer
+  :END:
+** Imports
+*** ipython
+#+BEGIN_SRC ipython
+  %matplotlib inline
+  import matplotlib.pyplot as plt
+  import numpy as np
+#+END_SRC
+*** pandas
+#+BEGIN_SRC ipython
+import pandas as pd    
+#+END_SRC
+
+** Data load
+*** load everything
+**** TODO time range selection
+
+#+RESULTS:
+:RESULTS:
+# Out[6]:
+#+BEGIN_EXAMPLE
+  ['bücherei.csv',
+  'anfänger.csv',
+  'digital art.csv',
+  'graphql.log',
+  'google trends.log',
+  'jenkins.log',
+  'cuisine.csv',
+  'blumen.csv',
+  'computer vision.csv',
+  'küchenhilfe.csv',
+  'scrapping.csv',
+  'pilzen.csv',
+  'virtual reality.csv',
+  'google trends.csv',
+  'vr.csv',
+  'computer vision.log',
+  'mushrooms.csv',
+  'docker.log',
+  'advertisment.csv',
+  'buchhandel.csv',
+  'flowers.csv',
+  'digital artist.csv',
+  'graphql.csv',
+  'yoga.csv',
+  'jenkins.csv',
+  'museum.csv',
+  'advertisement.csv',
+  'küche.csv',
+  'fintech.csv',
+  'flower.csv',
+  'movie.csv',
+  'restaurant.csv',
+  'crackers.csv',
+  'docker.csv',
+  'bio.csv',
+  'crackers.log',
+  'garden.csv',
+  'short movie.csv',
+  'gardening.csv',
+  'schneiderei.csv',
+  'heroku.csv',
+  'hammam.csv',
+  'advertisement.log',
+  'kunst und medien.csv',
+  'spa.csv']
+#+END_EXAMPLE
+:END:
+**** file list with path
+#+BEGIN_SRC ipython
+import os
+csv_files = []
+for dirpath, dirs, files in os.walk("../data/raw"): 
+  for filename in files:
+    fname = os.path.join(dirpath,filename)
+    if fname.endswith('.csv'):
+      csv_files.append(fname)
+#+END_SRC
+
+**** dataframe creation
+#+BEGIN_SRC ipython
+    jobs = pd.DataFrame()
+
+    for fl in csv_files:
+        print(fl+(30-len(fl)//2)*" *")
+        try:
+            jobs_set = pd.read_csv(fl)
+            jobs_set.dropna(axis=0, how='any', subset=["desc"], inplace=True)
+            jobs_set.drop_duplicates(subset="desc", inplace=True)            
+            try:                                                             
+                jobs.iloc[0,0]                                               
+                jobs = jobs.append(jobs_set)                                 
+            except IndexError:                                               
+                jobs = jobs_set                                              
+        except pd.errors.EmptyDataError:
+            pass
+#+END_SRC
+
+*** rename
+use to quickly reset original df
+#+BEGIN_SRC ipython
+df = jobs
+#+END_SRC
+
+*** python example                                                  :test:
+#+NAME: firstblock
+#+BEGIN_SRC python
+    x = 12
+    return x
+#+END_SRC
+
+#+BEGIN_SRC python :var x=firstblock
+return int(x)+1
+#+END_SRC
+
+*** org doc elisp example                                           :test:
+#+NAME: example-table
+| 1 |
+| 2 |
+| 3 |
+| 4 |
+
+#+NAME: table-length
+#+BEGIN_SRC emacs-lisp :var table=example-table
+(length table)
+#+END_SRC
+
+*** python                                                            :python:
+#+NAME: data-path
+#+BEGIN_SRC python :results value file
+"~/data/projects/jobseeker/data/raw/18-09-07/dsp.csv"
+#+END_SRC
+
+#+NAME: data-dsp
+#+BEGIN_SRC python :results value file
+"~/data/projects/jobseeker/data/raw/18-09-07/dsp.csv"
+#+END_SRC
+
+#+NAME: data-python
+#+BEGIN_SRC python :results value file
+"~/data/projects/jobseeker/data/raw/18-09-07/python.csv"
+#+END_SRC
+
+#+NAME: data-ds
+#+BEGIN_SRC python :results value file
+"~/data/projects/jobseeker/data/raw/18-09-07/data scientist.csv"
+#+END_SRC
+
+#+NAME: data-se
+#+BEGIN_SRC python :results value file
+"~/data/projects/jobseeker/data/raw/18-09-07/software engineer.csv"
+#+END_SRC
+** Manipulation
+*** Pioneer
+**** get data from path as org variable
+#+BEGIN_SRC ipython :var data=data-path
+    import pandas as pd
+    df = pd.read_csv(data)
+ #+END_SRC
+
+**** infos about data
+#+BEGIN_SRC ipython
+    df.count()
+#+END_SRC
+
+**** show short data insight
+***** raw pandas output
+#+BEGIN_SRC ipython
+df.head()
+#+END_SRC
+
+***** COMMENT in an org table                                         :slow:
+#+BEGIN_SRC ipython :eval no
+    head = df.head()
+    [list(head)] + [None] + head.values.tolist()
+#+END_SRC
+
+**** browse offers
+***** add custom function to pretyfy
+#+BEGIN_SRC ipython
+    from bs4 import BeautifulSoup
+
+    def souper(html):
+        soup = BeautifulSoup(html, 'html.parser')
+        print(soup.get_text())
+
+
+    def soupprint(df, begin, end):
+        for i in range(begin, end):
+            print(i, df.title.iloc[i])
+            print("\n")
+            print(df.company.iloc[i])
+            print("\n")
+            souper(df.desc.iloc[i])
+            print("\n"*3)
+            print("-"*100)
+            print("\n"*3)
+
+#+END_SRC
+
+***** print it !
+#+BEGIN_SRC ipython 
+    soupprint(head,0,3)
+#+END_SRC
+*** cleansing                                                          :clean:
+**** duplicates
+***** drop_duplicates
+#+BEGIN_SRC ipython
+    df.drop_duplicates(subset="desc", inplace=True)
+#+END_SRC
+
+***** count
+#+BEGIN_SRC ipython
+df.title.count()
+#+END_SRC
+
+**** olders
+***** map lambda                                                      :test:
+#+BEGIN_SRC ipython
+df = df[df.days_ago.str.contains("30+").map(lambda x: not x)]
+#+END_SRC
+
+***** ~                                                               :test:
+#+BEGIN_SRC ipython
+df = ~df[df.days_ago.str.contains("30+")]
+#+END_SRC
+
+***** ==False
+#+BEGIN_SRC ipython
+df = df[df.days_ago.str.contains("30+")==False]
+#+END_SRC
+
+***** count
+#+BEGIN_SRC ipython
+len(df)
+#+END_SRC
+**** string numbers to integers
+***** sol
+#+BEGIN_SRC ipython
+    df["days_ago"] = df.days_ago.apply(lambda x: int(x))
+#+END_SRC
+***** test
+#+BEGIN_SRC ipython
+df.days_ago.iloc[12]
+#+END_SRC
+**** drop erratic values
+***** run 
+#+BEGIN_SRC ipython
+    df = df[df.days_ago.lt(30)]
+#+END_SRC
+***** tests
+#+BEGIN_SRC ipython
+    df.days_ago.lt(30)
+#+END_SRC
+*** filtering
+**** look for keywords
+***** keyword definiton
+****** org variable
+#+NAME: keyword
+#+BEGIN_SRC python :nosession
+"kunst und medien"
+#+END_SRC
+
+***** look in title
+****** boolean serie construction                                    :test:
+#+BEGIN_SRC ipython :var k=keyword
+df.title.str.contains(k, case=False)
+#+END_SRC
+
+****** reduction of our dataset
+#+BEGIN_SRC ipython :var k=keyword
+    df = df[df.title.str.contains(k, case=False, na=False)]
+#+END_SRC
+
+***** look in description
+#+BEGIN_SRC ipython :var k=keyword
+    df = df[df.desc.str.contains(k, case=False, na=False)]
+#+END_SRC
+
+***** TODO test 
+goto Johnny Kitchin
+#+BEGIN_SRC ipython
+k
+#+END_SRC
+**** companies
+#+BEGIN_SRC ipython
+df = df[df.company.str.contains("berlin", case=False, na=False)]
+#+END_SRC
+
+** Stats
+*** overview
+**** head
+#+BEGIN_SRC ipython
+df.head()
+#+END_SRC
+
+**** count
+#+BEGIN_SRC ipython
+len(df)
+#+END_SRC
+
+*** days ago
+**** histogram
+***** pd plot
+#+BEGIN_SRC ipython
+    df.days_ago.plot.hist()
+#+END_SRC
+**** value count
+#+BEGIN_SRC ipython
+    df.days_ago.value_counts()
+#+END_SRC
+**** groupby
+***** basic output
+#+BEGIN_SRC ipython
+    df.groupby(["days_ago"]).groups
+#+END_SRC
+***** loop print
+#+BEGIN_SRC ipython
+grouped = df.groupby("days_ago")
+
+for name,group in grouped:
+    print(name)
+    print(group)
+#+END_SRC
+***** documentation                                                    :doc:
+****** pandas doc
+#+BEGIN_SRC ipython 
+help(df.groupby(["days_ago"]))
+#+END_SRC
+****** tutorial
+https://www.tutorialspoint.com/python_pandas/python_pandas_groupby.htm
+***** use
+#+BEGIN_SRC ipython
+    grouped = df.groupby(["days_ago"])
+    grouped.title.count().sort_values(ascending=False)
+#+END_SRC
+*** companies
+**** groupby
+***** define group
+#+BEGIN_SRC ipython
+comp_group = df.groupby(["company"])
+#+END_SRC
+
+***** print groups
+#+BEGIN_SRC ipython
+    comp_group.groups
+#+END_SRC
+***** count groups
+#+BEGIN_SRC ipython
+len(comp_group.groups)
+#+END_SRC
+***** number of job per company
+****** hack
+******* loop
+#+BEGIN_SRC ipython
+    for company in comp_group.groups.keys():
+                lenght = len(comp_group.groups[company])
+                if lenght > 1:
+                            print(company, lenght)
+#+END_SRC
+
+******* single
+#+BEGIN_SRC ipython
+    key = list(comp_group.groups.keys())[0]
+    list(comp_group.groups[key])
+#+END_SRC
+
+******* test
+#+BEGIN_SRC ipython
+len(comp_group.groups["Fraunhofer-Institut für Nachrichtentechnik, Heinrich-Hertz-Institut"])
+#+END_SRC
+****** pandas 
+#+BEGIN_SRC ipython
+    count = comp_group.title.count()
+    count.sort_values(ascending=False)
+#+END_SRC
+
+**** value count
+#+BEGIN_SRC ipython
+    df.company.value_counts()
+#+END_SRC
+
+** Words
+*** most used word
+**** category to look in 
+#+NAME: category
+#+BEGIN_SRC python :nosession
+"desc"
+#+END_SRC
+
+**** 
+** Printing
+*** quick overview
+**** head
+#+BEGIN_SRC ipython
+df.head()
+#+END_SRC
+
+**** count
+#+BEGIN_SRC ipython
+df.title.count()
+#+END_SRC
+**** titles
+#+BEGIN_SRC ipython
+df.title
+#+END_SRC
+
+*** html pages
+**** hacked around solution                                            :test:
+***** function to save results to html
+#+NAME: html-save
+#+BEGIN_SRC ipython
+    from datetime import datetime
+    from os import mkdir
+
+    def htmlexport(df, begin, end):
+                date = str(datetime.now())
+                path = "../reports/html/" + date + "/"
+                mkdir(path)
+                for i in range(begin, end):
+                            html = ""
+                            html = html + "\n"
+                            html = html + "Job number " + str(i)
+                            html = html + "\n"
+                            html = html + "-"*100
+                            html = html + "\n" + df.title.iloc[i]
+                            html = html + "\n"
+                            html = html + df.company.iloc[i]
+                            html = html + "\n"
+                            html = html + "-"*100
+                            html = html + "\n"
+                            html = html + df.desc.iloc[i]
+                            html = html + "\n"*3
+                            html = html + "-"*100
+                            html = html + "\n"*3
+                            filename = path + "job-" + str(i) + ".html"
+                            with open(filename, "a") as file:
+                                        file.write(html)
+#+END_SRC
+
+***** call function
+#+BEGIN_SRC ipython
+    htmlexport(dfk, 0, dfk.title.count())
+#+END_SRC
+***** PB : imossible to add links because of some encoding pb
+**** use xml.dom                                                       :test:
+***** use
+#+BEGIN_SRC ipython 
+    from xml.dom import minidom
+    minidom.parseString(dfk.desc.iloc[10])
+#+END_SRC
+
+***** PB : some descs are separated by comas
+****** change spider
+****** use regexp to parse again
+****** test with proper html files : maybe it is just not working with html ?
+#+BEGIN_SRC ipython 
+    from xml.dom import minidom
+    minidom.parseString("~/code/web/plasma-city/application/static/front.html")
+#+END_SRC
+
+**** use yattag
+***** imports
+#+BEGIN_SRC ipython
+    from datetime import datetime
+    from os import mkdir
+    from yattag import Doc
+#+END_SRC
+
+***** html page generation
+****** functions definition
+#+BEGIN_SRC ipython
+def linksgen(filename_base, pagenum, url):
+    doc, tag, text = Doc().tagtext()
+
+    with tag('a', href = "."):
+        text('Home page ')
+    with tag("a", href = filename_base + str(pagenum - 1) + ".html"):
+        text("Previous page ")
+    with tag("a", href = filename_base + str(pagenum + 1) + ".html"):
+        text("Next page ")
+    with tag("a", href = url):
+        text("Original page ")
+    return doc.getvalue()
+
+
+def pagegen(filename_base, pagenum, title, desc, company, days, url):
+    doc, tag, text = Doc().tagtext()
+    
+    doc.asis('<meta charset="UTF-8">')
+    with tag("title"):
+        text(title)
+    with tag("body"):
+        doc.asis(linksgen(filename_base, pagenum, url))
+        with tag("h1"):
+            text(title + " - " + company)
+        with tag("p"):
+            text(days)
+        with tag("div"):
+            doc.asis(desc)
+        doc.asis(linksgen(filename_base, pagenum, url))
+
+    return doc.getvalue()
+#+END_SRC
+
+****** test pagegen                                                  :test:
+#+BEGIN_SRC ipython
+pagegen("nom", 0, "titre", "desc", "firm", "days", "www")
+#+END_SRC
+
+****** test linksgen                                                 :test:
+#+BEGIN_SRC ipython
+linksgen("file", 10, "wwwww")
+#+END_SRC
+***** htmlexport function
+****** definition
+#+BEGIN_SRC ipython
+def htmlexport(df, begin, end):
+    date = str(datetime.now())
+    path = "../reports/html/" + date + "/"
+    mkdir(path)
+    for i in range(begin, end):
+        filename_base = "job-"
+        html = pagegen(filename_base,
+                       i,
+                       df.title.iloc[i],
+                       df.desc.iloc[i],
+                       df.company.iloc[i],
+                       df.days_ago.iloc[i],
+                       df.url.iloc[i]
+        )
+        filename = path + filename_base +  str(i) + ".html"
+        with open(filename, "a") as file:
+            file.write(html)
+
+#+END_SRC
+
+****** call
+#+BEGIN_SRC ipython
+htmlexport(df, 0, len(df))
+#+END_SRC
+*** server
+**** flask ? :D !!!
+*** org  table (python)                                               :python:
+**** john kitchin example                                        :test:
+#+BEGIN_SRC python
+    import pandas as pd
+    test = pd.DataFrame({'A': [1000, 1000], 'B' : [60, 100]})
+    test2 = [list(test)] + [None] + test.values.tolist()
+    test3 = test.values.tolist()
+    return (test, test2, test3)
+#+END_SRC
+
+**** my program                                                  :slow:
+#+NAME: data-set
+#+BEGIN_SRC python :var data=data-path
+    import pandas as pd
+    df = pd.read_csv(data)
+    return  [list(df)] + [None] + df.values.tolist()
+#+END_SRC
+
+**** COMMENT in an org table                                           :slow:
+#+BEGIN_SRC ipython :eval no
+    head = df.head()
+    [list(head)] + [None] + head.values.tolist()
+#+END_SRC
+
+                                                               :test:
+*** org results: html                                                   :test:
+#+BEGIN_SRC python :results html
+    dfk.desc.iloc[0]
+#+END_SRC
+
+*** soupprint
+**** session functions
+***** souper (using get text)
+#+BEGIN_SRC ipython
+from bs4 import BeautifulSoup
+
+def souper(html):
+    "returns only the text from a html string"
+    soup = BeautifulSoup(html, 'html.parser')
+    return soup.get_text()
+    #+END_SRC
+***** soupprint
+****** definition
+#+BEGIN_SRC ipython
+    from bs4 import BeautifulSoup
+
+    def souper(html):
+        soup = BeautifulSoup(html, 'html.parser')
+        print(soup.get_text())
+
+    def soupprint(df, begin, end):
+        for i in range(begin, end):
+            print(i, df.title.iloc[i])
+            print("\n")
+            print(df.company.iloc[i])
+            print("\n")
+            souper(df.desc.iloc[i])
+            print("\n"*3)
+            print("-"*100)
+            print("\n"*3)
+#+END_SRC
+****** call
+#+BEGIN_SRC ipython
+soupprint(df, 0, 10)
+#+END_SRC
+
+**** soupprint as org function
+***** definition
+#+NAME: soupprint
+#+BEGIN_SRC python
+from bs4 import BeautifulSoup
+
+def souper(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    print(soup.get_text())
+
+def soupprint(df, begin, end):
+    for i in range(begin, end):
+        print(i, df.title.iloc[i])
+        print("\n")
+        print(df.company.iloc[i])
+        print("\n")
+        souper(df.desc.iloc[i])
+        print("\n"*3)
+        print("-"*100)
+        print("\n"*3)
+#+END_SRC
+
+***** call
+#+CALL: soupprint()
+
+#+RESULTS[035511d92ded44ec24cc84fea0b5511c5863b3b6]:
+
+#+BEGIN_SRC python 
+    soupprint(dfk, 0, dfk.title.count())
+#+END_SRC
+** Queries
+*** get queries metadata
+**** dataframe using os results
+#+BEGIN_SRC ipython
+import os
+queries_name = []
+queries_size = []
+queries_path = []
+queries_time = []
+for dirpath, dirs, files in os.walk("../data/raw"): 
+  for filename in files:
+    if filename.endswith('.csv'):
+      
+      path = os.path.join(dirpath, filename)
+      queries_path.append(path)
+      
+      size = os.path.getsize(path)
+      queries_size.append(size)
+      
+      fname = filename.replace(".csv", "")
+      queries_name.append(fname)
+      
+      time = os.path.getmtime(path)
+      queries_time.append(time)
+
+queries = pd.DataFrame({"name" : queries_name, "path" : queries_path, "size" : queries_size, "time" : queries_time})      
+#+END_SRC
+**** remove oldests results 
+***** datetime time format
+#+BEGIN_SRC ipython
+queries["time"] = queries.time.apply(datetime.fromtimestamp)
+#+END_SRC
+
+***** y-m-d format time
+#+BEGIN_SRC ipython
+def format_time(x):
+    y = x.strftime("%Y-%m-%d")
+    return y
+
+queries["time_formated"] = queries.time.apply(format_time)
+#+END_SRC
+**** remove null size results 
+#+BEGIN_SRC ipython
+queries_null = queries[queries["size"] < 1]
+queries = queries[queries["size"] > 1]
+#+END_SRC
+**** number of entries in csv file
+***** read as pandas dataframe
+#+BEGIN_SRC ipython
+def entries_count(csv):
+    return len(pd.read_csv(csv))
+
+queries["entries"] = queries.path.apply(entries_count)
+#+END_SRC
+
+**** inspection
+#+BEGIN_SRC ipython
+import humanize
+queries["size_for_humans"] = queries["size"].apply(humanize.naturalsize)
+queries.sort_values("size", ascending=False)[["name", "size_for_humans", "entries"]].reset_index()
+#+END_SRC
+
+**** time evolution
+**** return list for next scraper launch
+remove null size results before (or not)
+#+BEGIN_SRC ipython
+queries_list = list(set(queries.name))
+#+END_SRC
+
+*** launch scraper with the list
