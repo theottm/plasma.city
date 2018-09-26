@@ -8,7 +8,7 @@ from yattag import Doc
 #+END_SRC
 
 #+RESULTS:
-: # Out[36]:
+: # Out[51]:
 ** text
 #+BEGIN_SRC ipython
 greeting = "Welcome to the Plasma City"
@@ -20,7 +20,7 @@ mail = "Send me an email : "
 #+END_SRC
 
 #+RESULTS:
-: # Out[37]:
+: # Out[52]:
 ** html
 #+BEGIN_SRC ipython :results html
 doc, tag, text = Doc().tagtext()
@@ -38,9 +38,10 @@ with tag("html", lang="en"):
             text("".join(["body {display: inline-block; margin: auto auto; text-align: center;}",
                          "html {text-align: center;}"]))
     with tag("body"):
+        doc.stag("br")
         with tag("h1"):
             text(greeting)
-        do.stag("div")
+        doc.stag("br")
         with tag("div"):
             text(info)
         doc.stag("li")
@@ -69,8 +70,8 @@ html
 
 #+RESULTS:
 #+BEGIN_EXPORT html
-# Out[38]:
-: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta content="width=device-width, initial-scale=1" name="viewport" /><meta content="teddd" name="author" /><title>Welcome to the Plasma City</title><style type="text/css">body {display: inline-block; margin: auto auto; text-align: center;}html {text-align: center;}</style></head><body><h1>Welcome to the Plasma City</h1><div></div><div>This is Théo Tyburn\'s peronnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="https://github.com/theottm/jobseeker">Jobseeker</a> my Data Science project <a href="./static/jobseeker.pdf">(notebook in pdf version)</a></div><li /><div>Send me an email : <a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div></body></html>'
+# Out[53]:
+: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta content="width=device-width, initial-scale=1" name="viewport" /><meta content="teddd" name="author" /><title>Welcome to the Plasma City</title><style type="text/css">body {display: inline-block; margin: auto auto; text-align: center;}html {text-align: center;}</style></head><body><br /><h1>Welcome to the Plasma City</h1><br /><div>This is Théo Tyburn\'s peronnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="https://github.com/theottm/jobseeker">Jobseeker</a> my Data Science project <a href="./static/jobseeker.pdf">(notebook in pdf version)</a></div><li /><div>Send me an email : <a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div></body></html>'
 #+END_EXPORT
 ** export
 #+BEGIN_SRC ipython
@@ -79,7 +80,7 @@ with open("homepage.html", "w") as file:
 #+END_SRC
 
 #+RESULTS:
-: # Out[39]:
+: # Out[54]:
 
 * add background
 ** P5.js
