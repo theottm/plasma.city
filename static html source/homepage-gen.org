@@ -5,22 +5,87 @@
 ** imports
 #+BEGIN_SRC ipython
 from yattag import Doc
+import cssutils
 #+END_SRC
 
 #+RESULTS:
-: # Out[51]:
+: # Out[339]:
 ** text
 #+BEGIN_SRC ipython
 greeting = "Welcome to the Plasma City"
 info = "This is Théo Tyburn's peronnal, professional and experimental website"
 disclaimer = "This website is under active construction, please wear a helmet while browsing."
 tags = "Computer Art, Data Science, UNIX"
-link = " my Data Science project "
+link = " is my Data Science project. You can see a pdf version of the notebook "
 mail = "Send me an email : "
 #+END_SRC
 
 #+RESULTS:
-: # Out[52]:
+: # Out[340]:
+** css
+*** tutorial
+http://cthedot.de/cssutils/
+#+BEGIN_SRC ipython
+from cssutils import css, stylesheets
+sheet = css.CSSStyleSheet()
+sheet.cssText = u'@import url(example.css) tv;'
+print(sheet.cssText)
+# @import url(example.css) tv;
+style = css.CSSStyleDeclaration()
+style['color'] = 'red' # until 0.9.5: setProperty(u'color', u'red')
+stylerule = css.CSSStyleRule(selectorText=u'body', style=style)
+sheet.add(stylerule) # use this from 0.9.5 which always succeeds
+# 1
+# OR THIS IS THE OFFICIAL DOM METHOD IF YOU WANT TO USE IT:
+# sheet.insertRule(stylerule, 0) # try before @import
+# xml.dom.HierarchyRequestErr: CSSStylesheet: Found @charset, @import or @namespace before index 0.
+# sheet.insertRule(stylerule) # at end of rules, returns index
+print(sheet.cssText)
+# @import url(example.css) tv;
+# body {
+# color: red
+# }
+# returns if new Medium is wellformed and has been added
+sheet.cssRules[0].media.appendMedium('print')
+# True
+# returns the new Selector:
+sheet.cssRules[1].selectorList.appendSelector('a')
+# cssutils.css.Selector(selectorText=u'a')
+print(sheet.cssText)
+# @import url(example.css) tv, print;
+# body, a {
+# color: red
+# }
+#+END_SRC
+
+#+RESULTS:
+: # Out[341]:
+*** use
+#+BEGIN_SRC ipython
+from cssutils import css, stylesheets
+css_html = css.CSSStyleSheet()
+style  = css.CSSStyleDeclaration()
+style["text-align"] = "center"
+stylerule = css.CSSStyleRule(selectorText=u'html', style=style)
+css_html.add(stylerule)
+css_html = css_html.cssText
+css_html = css_html.decode("utf-8")
+
+css_body = css.CSSStyleSheet()
+style = css.CSSStyleDeclaration()
+style["display"] = "inline block"
+style["margin"] = "auto auto"
+style["text-align"] = "center"
+style["background-image"] = "url('.static/img/IC.gif')"
+stylerule = css.CSSStyleRule(selectorText=u'body', style=style)
+css_body.add(stylerule)
+css_body = css_body.cssText
+css_body = css_body.decode("utf-8")
+#+END_SRC
+
+#+RESULTS:
+: # Out[342]:
+
 ** html
 #+BEGIN_SRC ipython :results html
 doc, tag, text = Doc().tagtext()
@@ -35,8 +100,7 @@ with tag("html", lang="en"):
         with tag("title"):
             text(greeting)
         with tag("style", type="text/css"):
-            text("".join(["body {display: inline-block; margin: auto auto; text-align: center;}",
-                         "html {text-align: center;}"]))
+            text("".join([css_html, css_body]))
     with tag("body"):
         doc.stag("br")
         with tag("h1"):
@@ -56,13 +120,23 @@ with tag("html", lang="en"):
                 text("Jobseeker")
             text(link)                
             with tag("a", href="./static/jobseeker.pdf"):
-                text("(notebook in pdf version)")                
+                text("here")                
         doc.stag("li")
         with tag("div"):
-            text(mail)
+            # text(mail)
             with tag("a", href="mailto:theo.tyburn@plasma.city"):
                 text("theo.tyburn@plasma.city")
-        
+        with tag("div"):
+            with tag("br"):
+                with tag("a", href="https://www.linkedin.com/in/theo-tyburn"):
+                    doc.stag("img", src="./static/img/linkedin.svg", width="30", height="30", viewBox="0 0 100 100")
+            with tag("br"):
+                with tag("a", href="https://github.com/theottm"):
+                    doc.stag("img", src="./static/img/github.svg", width="30", height="30", viewBox="0 0 100 100")
+            with tag("br"):
+                with tag("a", href="https://soundcloud.com/tedddbear"):
+                    doc.stag("img", src="./static/img/soundcloud.svg", width="30", height="30", viewBox="0 0 100 100")
+                
 html = doc.getvalue()
 html
 
@@ -70,8 +144,8 @@ html
 
 #+RESULTS:
 #+BEGIN_EXPORT html
-# Out[53]:
-: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta content="width=device-width, initial-scale=1" name="viewport" /><meta content="teddd" name="author" /><title>Welcome to the Plasma City</title><style type="text/css">body {display: inline-block; margin: auto auto; text-align: center;}html {text-align: center;}</style></head><body><br /><h1>Welcome to the Plasma City</h1><br /><div>This is Théo Tyburn\'s peronnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="https://github.com/theottm/jobseeker">Jobseeker</a> my Data Science project <a href="./static/jobseeker.pdf">(notebook in pdf version)</a></div><li /><div>Send me an email : <a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div></body></html>'
+# Out[343]:
+: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="author" content="teddd" /><title>Welcome to the Plasma City</title><style type="text/css">html {\n    text-align: center\n    }body {\n    display: inline block;\n    margin: auto auto;\n    text-align: center;\n    background-image: url(.static/img/IC.gif)\n    }</style></head><body><br /><h1>Welcome to the Plasma City</h1><br /><div>This is Théo Tyburn\'s peronnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="https://github.com/theottm/jobseeker">Jobseeker</a> is my Data Science project. You can see a pdf version of the notebook <a href="./static/jobseeker.pdf">here</a></div><li /><div><a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div><div><br><a href="https://www.linkedin.com/in/theo-tyburn"><img width="30" height="30" viewBox="0 0 100 100" src="./static/img/linkedin.svg" /></a></br><br><a href="https://github.com/theottm"><img width="30" height="30" viewBox="0 0 100 100" src="./static/img/github.svg" /></a></br><br><a href="https://soundcloud.com/tedddbear"><img width="30" height="30" viewBox="0 0 100 100" src="./static/img/soundcloud.svg" /></a></br></div></body></html>'
 #+END_EXPORT
 ** export
 #+BEGIN_SRC ipython
@@ -80,7 +154,7 @@ with open("homepage.html", "w") as file:
 #+END_SRC
 
 #+RESULTS:
-: # Out[54]:
+: # Out[344]:
 
 * add background
 ** P5.js
