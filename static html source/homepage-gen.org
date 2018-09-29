@@ -9,19 +9,19 @@ import cssutils
 #+END_SRC
 
 #+RESULTS:
-: # Out[339]:
+: # Out[52]:
 ** text
 #+BEGIN_SRC ipython
 greeting = "Welcome to the Plasma City"
-info = "This is Théo Tyburn's peronnal, professional and experimental website"
+info = "This is Théo Tyburn's personnal, professional and experimental website"
 disclaimer = "This website is under active construction, please wear a helmet while browsing."
 tags = "Computer Art, Data Science, UNIX"
-link = " is my Data Science project. You can see a pdf version of the notebook "
+link = " is my Data Science student project. You can see a pdf version of the notebook "
 mail = "Send me an email : "
 #+END_SRC
 
 #+RESULTS:
-: # Out[340]:
+: # Out[53]:
 ** css
 *** tutorial
 http://cthedot.de/cssutils/
@@ -59,7 +59,7 @@ print(sheet.cssText)
 #+END_SRC
 
 #+RESULTS:
-: # Out[341]:
+: # Out[54]:
 *** use
 #+BEGIN_SRC ipython
 from cssutils import css, stylesheets
@@ -84,7 +84,7 @@ css_body = css_body.decode("utf-8")
 #+END_SRC
 
 #+RESULTS:
-: # Out[342]:
+: # Out[55]:
 
 ** html
 #+BEGIN_SRC ipython :results html
@@ -128,12 +128,15 @@ with tag("html", lang="en"):
                 text("theo.tyburn@plasma.city")
         with tag("div"):
             with tag("br"):
+                with tag("a", href="static/cv-theo-tyburn.pdf"):
+                    doc.stag("img", src="./static/img/cv.svg", width="50", height="40", viewBox="0 0 100 100")
+            with tag("br"):
                 with tag("a", href="https://www.linkedin.com/in/theo-tyburn"):
                     doc.stag("img", src="./static/img/linkedin.svg", width="30", height="30", viewBox="0 0 100 100")
-            with tag("br"):
+                text("   ")
                 with tag("a", href="https://github.com/theottm"):
                     doc.stag("img", src="./static/img/github.svg", width="30", height="30", viewBox="0 0 100 100")
-            with tag("br"):
+                text("   ")
                 with tag("a", href="https://soundcloud.com/tedddbear"):
                     doc.stag("img", src="./static/img/soundcloud.svg", width="30", height="30", viewBox="0 0 100 100")
                 
@@ -144,8 +147,8 @@ html
 
 #+RESULTS:
 #+BEGIN_EXPORT html
-# Out[343]:
-: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="author" content="teddd" /><title>Welcome to the Plasma City</title><style type="text/css">html {\n    text-align: center\n    }body {\n    display: inline block;\n    margin: auto auto;\n    text-align: center;\n    background-image: url(.static/img/IC.gif)\n    }</style></head><body><br /><h1>Welcome to the Plasma City</h1><br /><div>This is Théo Tyburn\'s peronnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="https://github.com/theottm/jobseeker">Jobseeker</a> is my Data Science project. You can see a pdf version of the notebook <a href="./static/jobseeker.pdf">here</a></div><li /><div><a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div><div><br><a href="https://www.linkedin.com/in/theo-tyburn"><img width="30" height="30" viewBox="0 0 100 100" src="./static/img/linkedin.svg" /></a></br><br><a href="https://github.com/theottm"><img width="30" height="30" viewBox="0 0 100 100" src="./static/img/github.svg" /></a></br><br><a href="https://soundcloud.com/tedddbear"><img width="30" height="30" viewBox="0 0 100 100" src="./static/img/soundcloud.svg" /></a></br></div></body></html>'
+# Out[56]:
+: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="author" content="teddd" /><title>Welcome to the Plasma City</title><style type="text/css">html {\n    text-align: center\n    }body {\n    display: inline block;\n    margin: auto auto;\n    text-align: center;\n    background-image: url(.static/img/IC.gif)\n    }</style></head><body><br /><h1>Welcome to the Plasma City</h1><br /><div>This is Théo Tyburn\'s personnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a href="https://github.com/theottm/jobseeker">Jobseeker</a> is my Data Science student project. You can see a pdf version of the notebook <a href="./static/jobseeker.pdf">here</a></div><li /><div><a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div><div><br><a href="static/cv-theo-tyburn.pdf"><img width="50" src="./static/img/cv.svg" height="40" viewBox="0 0 100 100" /></a></br><br><a href="https://www.linkedin.com/in/theo-tyburn"><img width="30" src="./static/img/linkedin.svg" height="30" viewBox="0 0 100 100" /></a>   <a href="https://github.com/theottm"><img width="30" src="./static/img/github.svg" height="30" viewBox="0 0 100 100" /></a>   <a href="https://soundcloud.com/tedddbear"><img width="30" src="./static/img/soundcloud.svg" height="30" viewBox="0 0 100 100" /></a></br></div></body></html>'
 #+END_EXPORT
 ** export
 #+BEGIN_SRC ipython
@@ -154,7 +157,7 @@ with open("homepage.html", "w") as file:
 #+END_SRC
 
 #+RESULTS:
-: # Out[344]:
+: # Out[57]:
 
 * add background
 ** P5.js
