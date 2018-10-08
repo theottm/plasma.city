@@ -9,7 +9,7 @@ import cssutils
 #+END_SRC
 
 #+RESULTS:
-: # Out[80]:
+: # Out[16]:
 ** text
 #+BEGIN_SRC ipython
 greeting = "Welcome to the Plasma City"
@@ -22,7 +22,7 @@ mail = "Send me an email : "
 #+END_SRC
 
 #+RESULTS:
-: # Out[81]:
+: # Out[17]:
 ** css
 *** tutorial
 http://cthedot.de/cssutils/
@@ -77,7 +77,7 @@ style = css.CSSStyleDeclaration()
 style["display"] = "inline block"
 style["margin"] = "auto auto"
 style["text-align"] = "center"
-style["font-size"] = "large"
+style["background-image"] = "url('.static/img/IC.gif')"
 stylerule = css.CSSStyleRule(selectorText=u'body', style=style)
 css_body.add(stylerule)
 css_body = css_body.cssText
@@ -85,24 +85,17 @@ css_body = css_body.decode("utf-8")
 #+END_SRC
 
 #+RESULTS:
-: # Out[82]:
-** js
+: # Out[18]:
 ** html
 #+BEGIN_SRC ipython :results html
 doc, tag, text = Doc().tagtext()
 
-doc.asis('<!DOCTYPE html>')
+doc.asis('<meta charset="UTF-8">')
+
 with tag("html", lang="en"):
     with tag("head"):
-        doc.asis(''.join(['<meta charset="utf-8">',
-            '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-            '<title>p5.js example</title>',
-            '<style> body {padding: 0; margin: 0;} </style>',
-            '<script src="static/js/p5/p5.min.js"></script>',
-            '<script src="static/js/p5/addons/p5.dom.min.js"></script>',
-            '<script src="static/js/p5/addons/p5.sound.min.js"></script>',
-            '<script src="static/js/p5/sketch.js"></script>']))
         doc.asis('<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />')
+        doc.stag("meta", name="viewport", content="width=device-width, initial-scale=1")
         doc.stag("meta", name="author", content="teddd")
         with tag("title"):
             text(greeting)
@@ -110,13 +103,8 @@ with tag("html", lang="en"):
             text("".join([css_html, css_body]))
     with tag("body"):
         doc.stag("br")
-        with tag("div", id="p5"):
-            pass
         with tag("h1"):
             text(greeting)
-        doc.stag("br")
-        with tag("div", id="p5"):
-            pass
         doc.stag("br")
         with tag("div"):
             text(info)
@@ -156,8 +144,7 @@ with tag("html", lang="en"):
                 text("   ")
                 with tag("a", href="https://soundcloud.com/tedddbear", target="_blank"):
                     doc.stag("img", src="./static/img/soundcloud.svg", width="30", height="30", viewBox="0 0 100 100")
-
-
+                
 html = doc.getvalue()
 html
 
@@ -165,25 +152,9 @@ html
 
 #+RESULTS:
 #+BEGIN_EXPORT html
-# Out[83]:
-: '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>p5.js example</title><style> body {padding: 0; margin: 0;} </style><script src="static/js/p5/p5.min.js"></script><script src="static/js/p5/addons/p5.dom.min.js"></script><script src="static/js/p5/addons/p5.sound.min.js"></script><script src="static/js/p5/sketch.js"></script><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta content="teddd" name="author" /><title>Welcome to the Plasma City</title><style type="text/css">html {\n    text-align: center\n    }body {\n    display: inline block;\n    margin: auto auto;\n    text-align: center;\n    font-size: large\n    }</style></head><body><br /><div id="p5"></div><h1>Welcome to the Plasma City</h1><br /><div id="p5"></div><br /><div>This is Théo Tyburn\'s personnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a target="_blank" href="https://github.com/theottm/jobseeker">Jobseeker</a> is my Data Science student project.</div><div>You can read the notebook in different formats here : <a target="_blank" href="http://htmlpreview.github.io/?https://github.com/theottm/jobseeker/blob/master/notebooks/jobseeker.html">html</a> / <a href="https://github.com/theottm/jobseeker/raw/master/notebooks/jobseeker.pdf">pdf</a></div><li /><div><a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div><div><br><a href="static/cv-theo-tyburn.pdf"><img width="50" src="./static/img/cv.svg" viewBox="0 0 100 100" height="40" /></a></br><br><a target="_blank" href="https://www.linkedin.com/in/theo-tyburn"><img width="30" src="./static/img/linkedin.svg" viewBox="0 0 100 100" height="30" /></a>   <a target="_blank" href="https://github.com/theottm"><img width="30" src="./static/img/github.svg" viewBox="0 0 100 100" height="30" /></a>   <a target="_blank" href="https://soundcloud.com/tedddbear"><img width="30" src="./static/img/soundcloud.svg" viewBox="0 0 100 100" height="30" /></a></br></div></body></html>'
+# Out[19]:
+: '<meta charset="UTF-8"><html lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="author" content="teddd" /><title>Welcome to the Plasma City</title><style type="text/css">html {\n    text-align: center\n    }body {\n    display: inline block;\n    margin: auto auto;\n    text-align: center;\n    background-image: url(.static/img/IC.gif)\n    }</style></head><body><br /><h1>Welcome to the Plasma City</h1><br /><div>This is Théo Tyburn\'s personnal, professional and experimental website</div><li /><div>Computer Art, Data Science, UNIX</div><li /><div>This website is under active construction, please wear a helmet while browsing.</div><li /><div><a target="_blank" href="https://github.com/theottm/jobseeker">Jobseeker</a> is my Data Science student project.</div><div>You can read the notebook in different formats here : <a target="_blank" href="http://htmlpreview.github.io/?https://github.com/theottm/jobseeker/blob/master/notebooks/jobseeker.html">html</a> / <a href="https://github.com/theottm/jobseeker/raw/master/notebooks/jobseeker.pdf">pdf</a></div><li /><div><a href="mailto:theo.tyburn@plasma.city">theo.tyburn@plasma.city</a></div><div><br><a href="static/cv-theo-tyburn.pdf"><img height="40" src="./static/img/cv.svg" viewBox="0 0 100 100" width="50" /></a></br><br><a target="_blank" href="https://www.linkedin.com/in/theo-tyburn"><img height="30" src="./static/img/linkedin.svg" viewBox="0 0 100 100" width="30" /></a>   <a target="_blank" href="https://github.com/theottm"><img height="30" src="./static/img/github.svg" viewBox="0 0 100 100" width="30" /></a>   <a target="_blank" href="https://soundcloud.com/tedddbear"><img height="30" src="./static/img/soundcloud.svg" viewBox="0 0 100 100" width="30" /></a></br></div></body></html>'
 #+END_EXPORT
-*** example
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>p5.js example</title>
-    <style> body {padding: 0; margin: 0;} </style>
-    <script src="../p5.min.js"></script>
-    <script src="../addons/p5.dom.min.js"></script>
-    <script src="../addons/p5.sound.min.js"></script>
-    <script src="../sketch.js"></script>
-  </head>
-  <body>
-  </body>
-</html>
-
 ** export
 #+BEGIN_SRC ipython
 with open("homepage.html", "w") as file: 
@@ -191,7 +162,7 @@ with open("homepage.html", "w") as file:
 #+END_SRC
 
 #+RESULTS:
-: # Out[84]:
+: # Out[20]:
 
 * add background
 ** P5.js
